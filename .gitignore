@@ -1,0 +1,8 @@
+*.o
+*.a
+*.bak
+*.swp
+*~
+*.new
+*.out.v
+veredit

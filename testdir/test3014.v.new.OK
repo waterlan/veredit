@@ -1,0 +1,27 @@
+// veredit version : 3.0.14 (Jul 7 2009)
+// creation date   : Tue Jul  7 12:32:31 2009
+// user            : watere1
+
+module aa( a, b );
+input a;
+output b;
+
+endmodule
+
+module bb( a, b );
+parameter x = 300 ;
+parameter c = 3 ;
+parameter d = 4 ;
+input a;
+output b;
+
+endmodule
+
+module cc( clk, rst, out_irq );
+parameter cell_id = 1 ;
+input clk;
+input rst;
+output out_irq;
+
+endmodule
+

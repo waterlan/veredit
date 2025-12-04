@@ -1,0 +1,14 @@
+MODULE a
+{
+}
+
+MODULE c
+{
+}
+
+MODULE test
+{
+   -instance inst_a = inst_a // a
+   -instance inst_C = inst_C // c
+}
+

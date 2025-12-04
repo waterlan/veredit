@@ -1,0 +1,93 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 11:51:07 2025
+// user            : waterlan
+
+module BUFFER( X, A );
+output X;
+input A;
+
+endmodule
+
+module a( TEST, Q, Z, Z2, T, A, B, X );
+input TEST;
+output Z;
+output Z2;
+output T;
+output [2:5] X;
+input [15:0] Q;
+input A;
+input B;
+
+endmodule
+
+module b( Q, Z, Z2, T, A, B, C, D );
+output Z;
+output Z2;
+output T;
+output [15:0] Q;
+input A;
+input B;
+input C;
+input D;
+
+endmodule
+
+module c( W, Z, Z2, T, A, B, C, D, X, Y );
+output Z;
+output Z2;
+output T;
+input [7:0] W;
+input [2:5] X;
+input [2:5] Y;
+input A;
+input B;
+input C;
+input D;
+wire f, g, h, i, j, k, l;
+
+   and2x1 inst1 ( .Z(f), .A(A), .B(B));
+   and2x1 inst2 ( .Z(g), .A(f), .B(C));
+   and2x1 inst3 ( .Z(T), .A(f), .B(g));
+   and2x1 inst4 ( .Z(Z), .A(D), .B(g));
+endmodule
+
+module test( X, Q, T, Z, Z2, A, B );
+output Z;
+output [2:5] X;
+output [15:0] Q;
+output Z2;
+output [1:0] T;
+input A;
+input B;
+wire [15:0] Q_1;
+
+   a inst_a ( .TEST(), .Q(Q_1), .Z(Z), .Z2(Z2_0), .T(T_1), .A(A), .B(T_0_0), .X(X));
+   b Z2_inst ( .Q(Q_1), .Z(Q_0), .Z2(T_0), .T(T_0_0), .A(Z), .B(Z2_0), .C(Q_1[1]),
+      .D(T_1));
+   c inst_C ( .W({ Z2_0, T_1, { T_1, T_0_0 }, Q_1[3], { Q_1[2], Q_1[1], Q_1[0] } }), .X({ X_2,
+      X_3, X_4, X_5 }), .Y(Xx));
+   BUFFER X_2_inst ( .X(X[2]), .A(X_2));
+   BUFFER X_3_inst ( .X(X[3]), .A(X_3));
+   BUFFER X_4_inst ( .X(X[4]), .A(X_4));
+   BUFFER X_5_inst ( .X(X[5]), .A(X_5));
+   BUFFER Q_inst ( .X(Q[15]), .A(Q_1[15]));
+   BUFFER Q_inst_0 ( .X(Q[14]), .A(Q_1[14]));
+   BUFFER Q_inst_1 ( .X(Q[13]), .A(Q_1[13]));
+   BUFFER Q_inst_2 ( .X(Q[12]), .A(Q_1[12]));
+   BUFFER Q_inst_3 ( .X(Q[11]), .A(Q_1[11]));
+   BUFFER Q_inst_4 ( .X(Q[10]), .A(Q_1[10]));
+   BUFFER Q_inst_5 ( .X(Q[9]), .A(Q_1[9]));
+   BUFFER Q_inst_6 ( .X(Q[8]), .A(Q_1[8]));
+   BUFFER Q_inst_7 ( .X(Q[7]), .A(Q_1[7]));
+   BUFFER Q_inst_8 ( .X(Q[6]), .A(Q_1[6]));
+   BUFFER Q_inst_9 ( .X(Q[5]), .A(Q_1[5]));
+   BUFFER Q_inst_10 ( .X(Q[4]), .A(Q_1[4]));
+   BUFFER Q_inst_11 ( .X(Q[3]), .A(Q_1[3]));
+   BUFFER Q_inst_12 ( .X(Q[2]), .A(Q_1[2]));
+   BUFFER Q_inst_13 ( .X(Q[1]), .A(Q_1[1]));
+   BUFFER Q_inst_14 ( .X(Q[0]), .A(Q_1[0]));
+   BUFFER Z2_inst_0 ( .X(Z2), .A(Z2_0));
+   BUFFER T_1_inst ( .X(T[1]), .A(T_1));
+   BUFFER T_0_inst ( .X(T[0]), .A(T_0_0));
+endmodule
+

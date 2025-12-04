@@ -1,0 +1,54 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Tue Dec  2 16:50:43 2025
+// user            : waterlan
+
+module dft_obs_ctrl_comb( Q, D, CP, HOLD );
+output Q;
+input D;
+input CP;
+input HOLD;
+
+   mx21x2pdv U1MUX ( .Z(Q), .D0(D), .D1(n1), .S0(HOLD));
+   df1qpdv U2FF ( .Q(n1), .D(Q), .CP(CP));
+endmodule
+
+module dft_obs_ctrl_ff( Q, D, CP, HOLD );
+output Q;
+input D;
+input CP;
+input HOLD;
+
+   mx21x2pdv U1MUX ( .Z(n1), .D0(D), .D1(Q), .S0(HOLD));
+   df1qpdv U2FF ( .Q(Q), .D(n1), .CP(CP));
+endmodule
+
+module a_sub( a, b, c, d, e );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+
+endmodule
+
+module a( a, b, c, d, e );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+
+   a_sub a_sub_inst ( .a({ a_3, a_2, a_1, a_0 }), .b(b_0), .c(c_0), .d({ d[2], d_1,
+      d_0 }), .e({ e_1, e_0 }));
+   dft_obs_ctrl_comb a_3_inst ( .Q(a_3), .D(a[3]), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_comb a_2_inst ( .Q(a_2), .D(a[2]), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_comb a_1_inst ( .Q(a_1), .D(a[1]), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_comb a_0_inst ( .Q(a_0), .D(a[0]), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_comb b_inst ( .Q(b_0), .D(b), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_ff c_inst ( .Q(c), .D(c_0), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_ff d_1_inst ( .Q(d[1]), .D(d_1), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_ff d_0_inst ( .Q(d[0]), .D(d_0), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_ff e_1_inst ( .Q(e[1]), .D(e_1), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+   dft_obs_ctrl_ff e_0_inst ( .Q(e[0]), .D(e_0), .CP(dtl_mmio_clk), .HOLD(hold_inputs));
+endmodule
+

@@ -1,0 +1,58 @@
+XCOMM Copyright (C) 1999-2025  Erwin Waterlander
+XCOMM Copyright (C) 1999       Ondrej Popp
+XCOMM All rights reserved.
+XCOMM 
+XCOMM Redistribution and use in source and binary forms, with or without
+XCOMM modification, are permitted provided that the following conditions
+XCOMM are met:
+XCOMM 
+XCOMM 1. Redistributions of source code must retain the above copyright
+XCOMM    notice, this list of conditions and the following disclaimer.
+XCOMM 2. Redistributions in binary form must reproduce the above copyright
+XCOMM    notice in the documentation and/or other materials provided with
+XCOMM    the distribution.
+XCOMM 
+XCOMM THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+XCOMM EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+XCOMM IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+XCOMM PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE
+XCOMM FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+XCOMM CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+XCOMM OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+XCOMM BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+XCOMM WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+XCOMM OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+XCOMM IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+OBJDIR = .
+#define PassCDebugFlags 'CXXDEBUGFLAGS=$(CXXDEBUGFLAGS)'
+CXXDEBUGFLAGS = -g
+
+#ifdef HPArchitecture
+   CXX_COMMON_OPTIONS = $(TRACE) -z -Wall -Wextra -Wconversion -Wsign-conversion -Werror
+#else
+#ifdef cygwinArchitecture
+   CXX_COMMON_OPTIONS = $(TRACE) -Dcygwin -Wall -Wextra -Wconversion -Wsign-conversion -Werror
+#else
+   CXX_COMMON_OPTIONS = $(TRACE) -Wall -Wextra -Wconversion -Wsign-conversion -Werror
+#endif /* cygwinArchitecture */
+#endif /* HPArchitecture */
+
+CXX_TOPLEVEL_OPTIONS = $(CXX_COMMON_OPTIONS) -Wno-unused-parameter
+
+CXX_PARSER_OPTIONS = $(CXX_COMMON_OPTIONS) -Wno-conversion -Wno-sign-conversion -Wno-unused-label -Wno-unused-parameter
+
+CXX_SRC_OPTIONS = $(CXX_COMMON_OPTIONS) -Wno-unused-parameter
+
+CXX_OBJECT_OPTIONS = $(CXX_COMMON_OPTIONS)
+
+#ifndef LinuxArchitecture
+   /*
+    * MAKE should be set to gnu-make,
+    * it is best to alias or link 'make' to gnu-make
+    */
+
+   MAKE = make
+#endif
+
+CXX = g++

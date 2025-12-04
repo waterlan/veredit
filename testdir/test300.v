@@ -1,0 +1,74 @@
+module z (.j(k[3]), z, a[7:0], b, c, .x({p, q, r, s, t[1:0]}));
+input a;
+input b;
+input [2:0] c;
+output z;
+
+endmodule
+
+module x (z, a, b, c);
+input a;
+input b;
+input [2:0] c;
+output z;
+
+endmodule
+
+module a (z, a, b, c);
+input a;
+input b;
+input [2:0] c;
+output z;
+
+endmodule
+
+module b (z, a, b, c);
+input a;
+input b;
+input [2:0] c;
+output z;
+
+  a i_0 (.z(z), .a(a), .b(b), .c(c));
+  x i_1 (.z(z), .a(a), .b(b), .c(c));
+
+endmodule
+    
+module c (z, a, b, c);
+input a;
+input b;
+input [2:0] c;
+output z;
+
+  b i_0 (.z(z), .a(a), .b(b), .c(c));
+  b i_1 (.z(z), .a(a), .b(b), .c(c));
+  a i_2 (.z(z), .a(a), .b(b), .c(c));
+  d i_3 ();
+
+endmodule
+
+module d ( out_lut_1, out_lut_2, write_in_1,
+     write_in_2, RnW_1, RnW_2, data_in_1, data_in_2);
+output  out_lut_1, out_lut_2;
+
+input  RnW_1, RnW_2, data_in_1, data_in_2;
+
+input [0:15]  write_in_2;
+input [0:15]  write_in_1;
+
+
+
+LUT_right LUT_0 ( out_lut_1, write_in_1[0], write_in_1[1],
+     write_in_1[2], write_in_1[3], write_in_1[4],
+     write_in_1[5], write_in_1[6], write_in_1[7],
+     write_in_1[8], write_in_1[9], write_in_1[10],
+     write_in_1[11], write_in_1[12], write_in_1[13],
+     write_in_1[14], write_in_1[15], RnW_1, data_in_1);
+LUT_right LUT_1 ( out_lut_2, write_in_2[0], write_in_2[1],
+     write_in_2[2], write_in_2[3], write_in_2[4],
+     write_in_2[5], write_in_2[6], write_in_2[7],
+     write_in_2[8], write_in_2[9], write_in_2[10],
+     write_in_2[11], write_in_2[12], write_in_2[13],
+     write_in_2[14], write_in_2[15], RnW_2, data_in_2);
+
+endmodule
+

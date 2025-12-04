@@ -1,0 +1,68 @@
+// Copyright (C) 1999-2025  Erwin Waterlander
+// Copyright (C) 1999       Ondrej Popp
+// All rights reserved.
+// 
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions
+// are met:
+// 
+// 1. Redistributions of source code must retain the above copyright
+//    notice, this list of conditions and the following disclaimer.
+// 2. Redistributions in binary form must reproduce the above copyright
+//    notice in the documentation and/or other materials provided with
+//    the distribution.
+// 
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+// EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+// PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+// OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+// BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+// WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+// OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+// IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#include <stdio.h>
+#include "structures.h"
+#include "std_macro.h"
+
+#include "nameset.h"
+#include "vname.h"
+#include "variable_name.h"
+#include "variable_list.h"
+
+#include "text.h"
+#include "search.h"
+
+#include "Vname.h"
+
+bool equal(text name, variable_name b)
+{
+	return Eq(name,getName(b));
+}
+
+expfun ssize_t In(text name, variable_list l)
+{
+	extern bool equal(text name, variable_name b);
+	return Index(name,l,equal);
+}
+
+/***********************************************************/
+
+bool eqName(variable_name a, variable_name b)
+{
+	return Eq(getName(a),getName(b));
+}
+
+expfun ssize_t In(variable_name s, variable_list l)
+{
+	//extern bool eqName(variable_name a, variable_name b);
+        //extern variable_name elementAt(size_t position, variable_list set);
+        //extern size_t size(variable_list v);
+
+	return Index(s, l, eqName, true, elementAt, size);
+}
+
+

@@ -1,0 +1,7 @@
+? after deleting a module, delete all instantiations of that module
+* module rename
+* module postfix
+* module prefix
+* module copy
+* make 'listinst -net <net>' hierarchical
+

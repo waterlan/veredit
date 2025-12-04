@@ -1,0 +1,6 @@
+xmkmf
+make Makefiles
+sed -i "s/-D_BSD_SOURCE -D_SVID_SOURCE/-D_DEFAULT_SOURCE/" Makefile */Makefile
+make depend
+make
+make -f Manual.mk

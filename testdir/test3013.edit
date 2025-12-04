@@ -1,0 +1,22 @@
+MODULE a { -bufferassigns bfx1 }
+MODULE b { -bufferassigns BUF -input I }
+MODULE c { -bufferassigns BUFC -input I -output X }
+MODULE d { -bufferassigns BUFD -output X }
+
+MODULE b {
+   -bufferinput BUFF
+   -input I -output O
+    BUF z_inst(.I());
+}
+
+MODULE c {
+   -buffer BUFDD
+   -input I
+    BUFC z_inst(.X());
+}
+
+MODULE d {
+   -buffer BUFDD
+    BUFD z_inst(.X());
+}
+

@@ -1,0 +1,201 @@
+XCOMM Copyright (C) 1999-2025  Erwin Waterlander
+XCOMM Copyright (C) 1999       Ondrej Popp
+XCOMM All rights reserved.
+XCOMM 
+XCOMM Redistribution and use in source and binary forms, with or without
+XCOMM modification, are permitted provided that the following conditions
+XCOMM are met:
+XCOMM 
+XCOMM 1. Redistributions of source code must retain the above copyright
+XCOMM    notice, this list of conditions and the following disclaimer.
+XCOMM 2. Redistributions in binary form must reproduce the above copyright
+XCOMM    notice in the documentation and/or other materials provided with
+XCOMM    the distribution.
+XCOMM 
+XCOMM THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+XCOMM EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+XCOMM IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+XCOMM PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE
+XCOMM FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+XCOMM CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+XCOMM OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+XCOMM BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+XCOMM WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+XCOMM OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+XCOMM IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#define CONFIG_TOP
+#include "../Config.h"
+#undef CONFIG_TOP
+
+GEN_SRCS = \
+vname.cc \
+range.cc \
+port_reference.cc \
+port_reference_list.cc \
+compound_port_reference.cc \
+port_expression.cc \
+port.cc \
+port_list.cc \
+signal_type.cc \
+simple_signal.cc \
+signal_list.cc \
+Signal.cc \
+expression.cc \
+variable_name.cc \
+variable_list.cc \
+declaration.cc \
+continuous_assign.cc \
+portmap_element.cc \
+portmap.cc \
+instance.cc \
+parameter_decl.cc \
+module_item.cc \
+module_item_list.cc \
+vnode.cc \
+module.cc \
+verilog_item.cc \
+verilog_item_list.cc \
+rename_instance_statement.cc \
+declaration_list.cc \
+addport_statement.cc \
+editport_type.cc \
+delport_statement.cc \
+editinst_type.cc \
+instantiation_list.cc \
+editinst_statement.cc \
+editassign_type.cc \
+assign_list.cc \
+editassign_statement.cc \
+editparameter_decl_type.cc \
+parameter_decl_list.cc \
+editparameter_decl_statement.cc \
+delete_module_statement.cc \
+buffer_statement.cc \
+name_list.cc \
+remove_buf_statement.cc \
+buffer_type.cc \
+buffernet_statement.cc \
+simple_signal_list.cc \
+insertObsInput_statement.cc \
+insertObsOutput_statement.cc \
+listInst_statement.cc \
+match_item.cc \
+match_list.cc \
+tiecell_statement.cc \
+shell_statement.cc \
+bufassigns_statement.cc \
+pullup_pin_statement.cc \
+edit_element.cc \
+edit_list.cc \
+module_edit.cc \
+module_edit_list.cc \
+translation_unit.cc \
+dot.cc \
+dot_list.cc \
+module_list.cc \
+nameset.cc \
+intset.cc \
+intsets.cc \
+objset.cc
+
+PROTECTED_SRCS =
+
+SRCS = $(GEN_SRCS) $(PROTECTED_SRCS) $(EXTRA_SRCS)
+
+OBJS = $(SRCS:.cc=.o)
+
+GEN_HDRS = \
+vname.h \
+range.h \
+port_reference.h \
+port_reference_list.h \
+compound_port_reference.h \
+port_expression.h \
+port.h \
+port_list.h \
+signal_type.h \
+simple_signal.h \
+signal_list.h \
+Signal.h \
+expression.h \
+variable_name.h \
+variable_list.h \
+declaration.h \
+continuous_assign.h \
+portmap_element.h \
+portmap.h \
+instance.h \
+parameter_decl.h \
+module_item.h \
+module_item_list.h \
+vnode.h \
+module.h \
+verilog_item.h \
+verilog_item_list.h \
+rename_instance_statement.h \
+declaration_list.h \
+addport_statement.h \
+editport_type.h \
+delport_statement.h \
+editinst_type.h \
+instantiation_list.h \
+editinst_statement.h \
+editassign_type.h \
+assign_list.h \
+editassign_statement.h \
+editparameter_decl_type.h \
+parameter_decl_list.h \
+editparameter_decl_statement.h \
+delete_module_statement.h \
+buffer_statement.h \
+name_list.h \
+remove_buf_statement.h \
+buffer_type.h \
+buffernet_statement.h \
+simple_signal_list.h \
+insertObsInput_statement.h \
+insertObsOutput_statement.h \
+listInst_statement.h \
+match_item.h \
+match_list.h \
+tiecell_statement.h \
+shell_statement.h \
+bufassigns_statement.h \
+pullup_pin_statement.h \
+edit_element.h \
+edit_list.h \
+module_edit.h \
+module_edit_list.h \
+translation_unit.h \
+dot.h \
+dot_list.h \
+module_list.h \
+nameset.h \
+intset.h \
+intsets.h \
+objset.h
+
+PROTECTED_HDRS =
+
+INCLUDE_FILES = $(GEN_HDRS) $(PROTECTED_HDRS)
+
+INCLUDES = -I.. -I../parser -I../src -I../util
+
+CXXOPTIONS = $(CXX_OBJECT_OPTIONS) -Wno-format-security
+
+TGTPATH = ../$(OBJDIR)
+
+vpath %.o $(TGTPATH)
+
+NormalLibraryTarget(objects,$(OBJS))
+DependTarget()
+
+
+clean ::
+	rm -f *.tmp*
+
+#define CONFIG_BOT
+#include "../Config.h"
+#undef CONFIG_BOT
+

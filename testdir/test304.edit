@@ -1,0 +1,44 @@
+MODULE *
+{
+  -tiecell tiedown
+  -output  zero_out
+  -other   .clk(clk), .rst(rst)
+  -net 1'b0
+  -exclude se si ssi ssi_q
+
+  -tiecell tieup
+  -output one_out
+  -other   .clk(clk), .rst(rst)
+  -net 1'b1
+  -exclude se si ssi ssi_q
+
+
+  -insertobsoutput obs_mod
+    -input D
+    -output Q
+    -other .clk(clk), .reset(rst)
+    -nets z
+  -insertobsinput obs_mod
+    -input D
+    -output Q
+    -other .clk(clk), .reset(rst)
+    -nets a
+}
+
+MODULE c*
+{
+	-modinst -keepmodname
+	 bf2x i0 ( .A(XXX));
+ 	 tiedown tiedown_inst (.zero_out(XXX), .clk(in_clock), .rst(in_reset));
+	 obs_mod z_inst ( .clk(in_clock), .reset(in_reset));
+	 obs_mod a_inst ( .clk(in_clock), .reset(in_reset));
+}
+
+MODULE a*
+{
+	-modinst -keepmodname
+	 tiedown tiedown_inst (.clk(clk), .rst(in_rst));
+	 obs_mod z_inst ( .clk(clk), .reset(in_rst));
+	 obs_mod a_inst ( .clk(clk), .reset(in_rst));
+}
+

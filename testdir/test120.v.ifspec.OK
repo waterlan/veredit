@@ -1,0 +1,19 @@
+DESIGN clkbuf
+IN   	clkin	1	@0
+OUT  	clkout	1	@0
+
+
+DESIGN MACRO_MT1
+IN   	aap	1	@0
+OUT  	banaan	3	@0
+INOUT	ui	1	@0
+OUT  	appel	3	@0
+OUT  	mmmm	3	@0
+
+
+DESIGN MACRO_MT2
+IN   	aap	1	@0
+OUT  	banaan	3	@0
+OUT  	appel	1	@0
+
+

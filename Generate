@@ -1,0 +1,2 @@
+c3po-0.20.41 veredit.G -distr -overloaded -noForceObj \
+-srcDir src -binDir '/home/${LOGNAME}/bin' -f $*

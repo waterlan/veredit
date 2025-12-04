@@ -1,0 +1,84 @@
+MODULE clkbuf
+{
+    -delinst
+      -ALL
+
+    -addinst
+      BUF buf1 (.A(clkin), .Z(clkout));
+}
+
+MODULE MACRO_MT1
+{
+
+    // 'ALL' is not a keyword anymore since veredit 1.2.0
+    // Veredit will search port ALL.
+    -delports
+    ALL
+
+
+    // 'ALL' is not a keyword anymore since veredit 1.2.0
+    // Veredit will search port ALL.
+    -rmports
+    ALL
+
+
+    -delports
+     appel
+
+
+    -addports
+     input [3:0] mies, noot;
+    
+
+    -rmports
+     noot
+    
+
+    -delassign
+    -ALL
+        
+}
+MODULE MACRO_MT2
+{
+    -addports
+      input [1:0] aap;
+
+
+    -delports
+      e
+    
+
+    -rmports
+      f
+    
+
+    -rmports
+     -ALL
+    
+
+    -delassign
+      assign c = b;
+
+    -addassign
+      assign banaan[2:0] = a[2:0] ;
+      assign f = b ;
+      assign g = "01";
+      assign h = {1'b1, b};
+
+    -addports
+      wire [1:0] a = {1'b1, b};
+      wire [0:0] b = 0;
+    
+
+    -delinst
+     cella a_inst (.aap(), .appel(), .banaan(appel));
+     cellb b_inst ();
+
+
+    -addinst
+      cella   a_inst (.noot(noot));
+      newcell c_inst (.clk(clk));
+
+    -instance d_inst = D_INSTANCE
+
+}

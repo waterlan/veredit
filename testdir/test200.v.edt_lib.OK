@@ -1,0 +1,92 @@
+Library veredit {
+  Property {
+    date = "tomorrow";
+    version = "veredit 3.0.18";
+    vendor = "veredit 3.0.18";
+    origin = "veredit 3.0.18";
+    source = "veredit 3.0.18";
+    process = "CMOS12";
+    voltage = "1.1";
+    temperature = "125";
+    filename = "test200.v.edt_lib";
+    libnorm = "2.2";
+  }
+Cell bfx1 {
+  Input  A { fanin = 1.0; }
+  Output Z { fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+Cell bfx2 {
+  Input  A { fanin = 1.0; }
+  Output Z { fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+Cell bfx3 {
+  Input  A { fanin = 1.0; }
+  Output Z { fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+Cell bfx4 {
+  Input  A { fanin = 1.0; }
+  Output Z { fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+Cell bufx4 {
+  Input  A { fanin = 1.0; }
+  Output Z { fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+Cell MODULE {
+  Input  END[4] { _ndsArray = "END" { 4; 0; 4; } fanin = 1.0; }
+  Input  END[3] { _ndsArray = "END" { 4; 0; 3; } fanin = 1.0; }
+  Input  END[2] { _ndsArray = "END" { 4; 0; 2; } fanin = 1.0; }
+  Input  END[1] { _ndsArray = "END" { 4; 0; 1; } fanin = 1.0; }
+  Input  END[0] { _ndsArray = "END" { 4; 0; 0; } fanin = 1.0; }
+  Input  INPUT { fanin = 1.0; }
+  Output OTHER { fanout = 0.015; }
+  Output NET[2] { _ndsArray = "NET" { 2; 1; 2; } fanout = 0.015; }
+  Output NET[1] { _ndsArray = "NET" { 2; 1; 1; } fanout = 0.015; }
+  Output a { fanout = 0.015; }
+  Output b { fanout = 0.015; }
+  Output c { fanout = 0.015; }
+  InOut  d[12] { _ndsArray = "d" { 12; 0; 12; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[11] { _ndsArray = "d" { 12; 0; 11; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[10] { _ndsArray = "d" { 12; 0; 10; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[9] { _ndsArray = "d" { 12; 0; 9; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[8] { _ndsArray = "d" { 12; 0; 8; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[7] { _ndsArray = "d" { 12; 0; 7; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[6] { _ndsArray = "d" { 12; 0; 6; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[5] { _ndsArray = "d" { 12; 0; 5; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[4] { _ndsArray = "d" { 12; 0; 4; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[3] { _ndsArray = "d" { 12; 0; 3; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[2] { _ndsArray = "d" { 12; 0; 2; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[1] { _ndsArray = "d" { 12; 0; 1; } fanin = 1.0; fanout = 0.015; }
+  InOut  d[0] { _ndsArray = "d" { 12; 0; 0; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[12] { _ndsArray = "e" { 12; 0; 12; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[11] { _ndsArray = "e" { 12; 0; 11; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[10] { _ndsArray = "e" { 12; 0; 10; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[9] { _ndsArray = "e" { 12; 0; 9; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[8] { _ndsArray = "e" { 12; 0; 8; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[7] { _ndsArray = "e" { 12; 0; 7; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[6] { _ndsArray = "e" { 12; 0; 6; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[5] { _ndsArray = "e" { 12; 0; 5; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[4] { _ndsArray = "e" { 12; 0; 4; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[3] { _ndsArray = "e" { 12; 0; 3; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[2] { _ndsArray = "e" { 12; 0; 2; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[1] { _ndsArray = "e" { 12; 0; 1; } fanin = 1.0; fanout = 0.015; }
+  InOut  e[0] { _ndsArray = "e" { 12; 0; 0; } fanin = 1.0; fanout = 0.015; }
+
+  Property { area = 1.0; }
+}
+
+}

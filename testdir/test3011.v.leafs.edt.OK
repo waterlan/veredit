@@ -1,0 +1,24 @@
+MODULE a
+{
+   -instance a_i0 = a_i0 // a_sub
+   -instance a_i1 = a_i1 // a_sub
+   -instance inst1 = inst1 // and2x1
+}
+
+MODULE c
+{
+   -instance inst1 = inst1 // and2x1
+   -instance inst2 = inst2 // and2x1
+   -instance inst3 = inst3 // and2x1
+   -instance inst4 = inst4 // and2x1
+   -instance c_i0 = c_i0 // a_sub
+   -instance c_i1 = c_i1 // a_sub
+}
+
+MODULE test
+{
+   -instance inst_a = inst_a // a
+   -instance Z2_inst = Z2_inst // b
+   -instance inst_C = inst_C // c
+}
+

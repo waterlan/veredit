@@ -1,0 +1,14 @@
+MODULE aa {
+
+   -delparameterdecl -ALL 
+}
+
+MODULE bb {
+
+   -delparameterdecl parameter y = 2 ; 
+
+   -addparameterdecl
+    parameter x = 300 ;
+    parameter c = 3 ;
+    parameter d = 4 ;
+}

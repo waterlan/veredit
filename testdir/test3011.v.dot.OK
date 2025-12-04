@@ -1,0 +1,8 @@
+DIGRAPH VERILOG{
+rankdir=LR;
+a -> a_sub   [label= "2x "];
+c -> a_sub   [label= "2x "];
+test -> a
+test -> b
+test -> c
+}

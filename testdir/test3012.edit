@@ -1,0 +1,10 @@
+MODULE test1 {
+
+	-addports wire [2:0] Banaan;
+	-delnets a, c, b, bbb, zero, tt, TT
+}
+
+MODULE test2 {
+	-delnets -ALL
+}
+

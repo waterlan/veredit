@@ -1,0 +1,24 @@
+MODULE a_sub
+{
+   -tiecell tie_down
+	-output Z
+	-other .rst_n(rst_n), .se(se), .si(si)
+	-net 1'b0
+	-inst buf_inst5
+        -label _special
+}
+
+MODULE *
+{
+
+   -tiecell tie_up
+	-output Z
+	-other .rst_n(rst_n)
+	-net 1'b1
+
+   -tiecell tie_down
+	-output Z
+	-other .rst_n(rst_n), .se(se)
+	-net 1'b0
+	-exclude si
+}

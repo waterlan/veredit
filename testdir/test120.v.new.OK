@@ -1,0 +1,55 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 12:27:26 2025
+// user            : waterlan
+
+`uselib file=/p/lib/corelib/1.3/tools/verilog/corelib.v
+
+`timescale 1ns / 10ps
+
+`include "fifo_all.v"
+
+module clkbuf( clkin, clkout );
+input clkin;
+output clkout;
+
+   BUF buf1 ( .A(clkin), .Z(clkout));
+endmodule
+
+module MACRO_MT1( clk, aap, banaan, mmmm, ui, mies );
+input clk;
+input aap;
+output [2:0] banaan;
+inout ui;
+output [2:0] mmmm;
+input [3:0] mies;
+wire [2:0] banaan, boot;
+wire ALL;
+wire [3:0] noot;
+
+endmodule
+
+module MACRO_MT2( );
+wire [2:0] weg, huis;
+wire tak, boot;
+wire b = 1;
+wire [2:0] a = "111";
+wire f;
+wire clk;
+wire aap;
+wire [2:0] banaan;
+wire appel;
+
+   assign a = b ;
+   assign d = b ;
+   assign banaan[2:0] = a[2:0] ;
+   assign f = b ;
+   assign g = "01" ;
+   assign h = { 1'b1, b } ;
+
+   cella a_inst ( .clk(clk), .\a (), .noot(noot));
+   celld D_INSTANCE ( .clk(clk), .aap(aap), .appel(appel), .banaan(banaan));
+   newcell c_inst ( .clk(clk));
+   defparam a_inst.i0_inst.mem_inst.preloadMem = "mem0.init";
+   defparam a_inst.i1_inst.mem_inst.preloadMem = "mem1.init";
+endmodule
+

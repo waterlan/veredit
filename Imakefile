@@ -1,0 +1,97 @@
+XCOMM Copyright (C) 1999-2025  Erwin Waterlander
+XCOMM Copyright (C) 1999       Ondrej Popp
+XCOMM All rights reserved.
+XCOMM 
+XCOMM Redistribution and use in source and binary forms, with or without
+XCOMM modification, are permitted provided that the following conditions
+XCOMM are met:
+XCOMM 
+XCOMM 1. Redistributions of source code must retain the above copyright
+XCOMM    notice, this list of conditions and the following disclaimer.
+XCOMM 2. Redistributions in binary form must reproduce the above copyright
+XCOMM    notice in the documentation and/or other materials provided with
+XCOMM    the distribution.
+XCOMM 
+XCOMM THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+XCOMM EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+XCOMM IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+XCOMM PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE
+XCOMM FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+XCOMM CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+XCOMM OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+XCOMM BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+XCOMM WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+XCOMM OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+XCOMM IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#define CONFIG_TOP
+#include "Config.h"
+#undef CONFIG_TOP
+
+#define IHaveSubdirs
+SUBDIRS = parser src util objects
+MakeSubdirs($(SUBDIRS))
+DependSubdirs($(SUBDIRS))
+
+LOCAL_LIBRARIES = \
+./parser/libparser.a \
+./src/libsrc.a \
+./util/libutil.a \
+./objects/libobjects.a \
+./parser/libparser.a \
+./src/libsrc.a \
+./util/libutil.a \
+./objects/libobjects.a
+DEPLIBS=$(LOCAL_LIBRARIES)
+
+BINDIR = /home/${LOGNAME}/bin
+
+GEN_SRCS = \
+main.cc
+
+PROTECTED_SRCS = \
+Usage.cc \
+Driver.cc
+
+SRCS = $(GEN_SRCS) $(PROTECTED_SRCS) $(EXTRA_SRCS)
+
+OBJS = $(SRCS:.cc=.o)
+
+GEN_HDRS = \
+std_macro.h \
+structures.h
+
+PROTECTED_HDRS = \
+Config.h \
+Constants.h \
+Usage.h \
+Driver.h
+
+INCLUDE_FILES = $(GEN_HDRS) $(PROTECTED_HDRS)
+
+INCLUDES = -I. -Iparser -Isrc -Iutil -Iobjects
+
+CXXOPTIONS = $(CXX_TOPLEVEL_OPTIONS)
+
+TGTPATH = $(OBJDIR)
+
+vpath %.o $(TGTPATH)
+
+#if defined CppManTarget
+#undef CppManTarget
+#endif
+#define CppManTarget(name, defs)
+
+#if !defined ComplexCplusplusProgramTarget
+#define ComplexCplusplusProgramTarget(x) ComplexProgramTarget(x)
+#endif
+
+ComplexCplusplusProgramTarget(veredit)
+
+clean ::
+	rm -f *.tmp*
+
+#define CONFIG_BOT
+#include "Config.h"
+#undef CONFIG_BOT
+

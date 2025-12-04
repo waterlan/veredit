@@ -1,0 +1,24 @@
+MODULE c
+{
+  -buffer BUFFER
+   and2x1 inst1 (.Z());
+   and2x1 inst3 (.B());
+  
+}
+MODULE test
+{
+
+   -buffer BUFFER 
+	a inst_a(.Z2());
+	b Z2_inst (.T());
+	c inst_C (.W());
+	
+	-bufferinput BUFFER
+	a inst_a(.II());
+
+	-addinst
+	a inst_a (.TEST(TESTING));
+	a inst_a (.TESTB());
+	
+
+}

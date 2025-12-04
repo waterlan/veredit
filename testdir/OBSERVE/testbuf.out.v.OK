@@ -1,0 +1,48 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Tue Dec  2 16:51:34 2025
+// user            : waterlan
+
+module buffer( Z, A );
+output Z;
+input A;
+
+endmodule
+
+module a_sub( a, b, c, d, e );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+
+endmodule
+
+module b_sub( a, b, c, d, e, f );
+input [3:0] a;
+input b;
+input c;
+input [2:0] d;
+input [1:0] e;
+output [1:0] f;
+
+endmodule
+
+module a( a, b, c, d, e, f );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+output [1:0] f;
+wire [2:0] d;
+wire [1:0] e;
+wire [2:0] d_0;
+
+   a_sub a_sub_inst ( .a(a), .b(b), .c(c_0), .d(d_0), .e(e));
+   b_sub b_sub_inst ( .a(a), .b(b), .c(c_0), .d(d_0), .e(e), .f(f));
+   buffer c_inst ( .Z(c), .A(c_0));
+   buffer d_inst ( .Z(d[2]), .A(d_0[2]));
+   buffer d_inst_0 ( .Z(d[1]), .A(d_0[1]));
+   buffer d_inst_1 ( .Z(d[0]), .A(d_0[0]));
+endmodule
+

@@ -1,0 +1,15 @@
+MODULE a
+{
+   -insertobsinput dft_obs_ctrl_comb
+   -input D 
+   -output Q 
+   -other .CP(dtl_mmio_clk), .HOLD(hold_inputs)
+   -nets a[3:0] b
+   
+   -insertobsoutput dft_obs_ctrl_ff
+   -input D
+   -output Q
+   -other .CP(dtl_mmio_clk), .HOLD(hold_inputs)
+   -nets c d[1:0] e
+}
+

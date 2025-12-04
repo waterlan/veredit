@@ -1,0 +1,32 @@
+PREREQUISITES
+
+        Requires for a clean build:
+
+            gcc >= 4.5.0
+            flex 2.5.35
+            bison
+            imake
+            GNU make
+            perl
+
+        For older versions of gcc use a different Config.h:
+
+            cp Config.h.gcc422 Config.h
+
+INSTALLATION
+
+        Type the following command to compile:
+
+            ./Compile
+
+DEVELOPMENT
+
+        This version of Veredit is made with C3PO 0.20.41
+
+        Get C3PO at https://sourceforge.net/projects/c3po
+        c3po/branches/c3po-0.20
+
+        To generate parser and API with C3PO type:
+
+            ./Generate
+

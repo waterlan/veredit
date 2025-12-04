@@ -1,0 +1,45 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 10:24:32 2025
+// user            : waterlan
+
+module buffer( z, a );
+output z;
+input a;
+
+endmodule
+
+module a_sub( a, b, c, d, e, rst_n, se, si );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+input rst_n;
+
+   buffer buf_inst0 ( .z(c), .a(tie_up_tienet));
+   buffer buf_inst1 ( .z(d[2]), .a(tie_up_tienet));
+   buffer buf_inst2 ( .z(d[1]), .a(tie_up_tienet));
+   buffer buf_inst3 ( .z(d[0]), .a(tie_down_tienet_0));
+   buffer buf_inst4 ( .z(e[1]), .a(tie_up_tienet));
+   buffer buf_inst5 ( .z(e[0]), .a(tie_down_tienet));
+   tie_down tie_down_special_inst ( .Z(tie_down_tienet), .rst_n(rst_n), .se(se),
+      .si(si));
+   tie_up tie_up_inst ( .Z(tie_up_tienet), .rst_n(rst_n));
+   tie_down tie_down_inst ( .Z(tie_down_tienet_0), .rst_n(rst_n), .se(se));
+endmodule
+
+module a( a, b, c, d, e, rst_n, se );
+input [3:0] a;
+input b;
+output c;
+output [2:0] d;
+output [1:0] e;
+input rst_n;
+input se;
+
+   a_sub a_sub_inst ( .a({ tie_down_tienet, tie_up_tienet }), .b(tie_up_tienet), .c(c),
+      .d(d), .e(e), .rst_n(rst_n), .se(se), .si(1'b0));
+   tie_up tie_up_inst ( .Z(tie_up_tienet), .rst_n(rst_n));
+   tie_down tie_down_inst ( .Z(tie_down_tienet), .rst_n(rst_n), .se(se));
+endmodule
+

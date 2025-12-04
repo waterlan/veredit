@@ -1,0 +1,618 @@
+3.0.19 2025-12-03  Erwin
+	* Add FreeBSD license en publish veredit on GitHub.
+	* Change to C3PO 0.20.41.
+	* Cleanup tests.
+
+3.0.18 2012-02-29  Erwin
+	* src/ModuleItemList.cc: Fix printf, \n was missing.
+	* Manual.mk: Create manual in PS and PDF format.
+	* veredit.pod: Reformat such that it fits on A4.
+
+3.0.17 2011-09-21  Erwin
+	* Change to C3PO 0.20.39 (better support for gcc 4.x).
+	* Source code cleanup for -Wextra -Wconversion -Wsign-conversion -Werror.
+	* Requires gcc >= 4.5.0 and flex 2.5.35 to compile clean.
+
+3.0.16 2011-09-09  Erwin
+	* Change to C3PO 0.20.36 (better support for gcc 4.x).
+	* Source code cleanup for gcc 4.x.
+	* Veredit compiles now with gcc 4.2.2.
+
+3.0.15 2011-08-16  Erwin
+	* Manual: Converted to Perl POD format. From POD we generate
+	  ROFF (man page), HTML and TXT.
+
+	* -tiecell: New optional option -label.
+	   A label will be added in the instance name of the tiecell.
+	   The instance name will be "<tiecell name><label>_inst"
+
+	MODULE top
+	{
+		-tiecell TIECELL
+		-output TH
+		-net 1'b1
+		-label _tiehigh
+	}
+
+	This will result in this instantiation:
+
+	TIECELL TIECELL_tiehigh_inst (.TH(TIECELL_tienet_0));
+
+3.0.14 2009-07-07  Erwin
+	* Support simple parameter declarations: like
+	  parameter c = 3 ;
+	* New edit commands: -delparameterdecl and -addparameterdecl.
+	  Work similar as -delassign and -addassign
+
+3.0.13 2006-08-04  Erwin
+	* Options -buffer, -bufferinput and bufferassigns : One can specify the buffer pin names
+	  with the options -input and -output.
+
+	Example:
+	
+	MODULE *
+	{
+	   -bufferassigns BUFFD1 -input I -output Z
+	}
+
+
+3.0.12 2006-03-30  Erwin
+	* fix for gcc 3.4 : Veredit source compiles now also with gcc 3.4 (and 4.0).
+	* use c3po 0.20.29 : Public available C3PO version at http://sourceforge.net/projects/c3po
+	* new command -delnets : delete nets from a module.
+
+
+3.0.11 2006-01-03  Erwin
+	* New option -inst [module names] : Show hierachical instance names of modules.
+	* New option -hier : Write module hierarchy.
+
+3.0.10 2005-03-18  Erwin
+	* New option for -tiecell : -inst <instance names>
+	-inst
+	  Optional parameter. With this option one can specify instance names. Only the instances in this
+	  space separated list will get a tiecell connection, all others are skipped. Without this option
+	  all instances will get a tiecell connection if needed. Wildcard `*' is supported.
+
+	MODULE top
+	{
+		-tiecell TIECELL
+		-output TH
+		-net 1'b1
+		-inst i_34 U*
+	}
+
+
+
+3.0.9 2005-01-06  Erwin
+	* New option : -expand
+
+	With this option Veredit expands all port and net declarations
+	and removes single wire declarations.
+
+	This is handy when you want to run some AWK or Perl script on your netlist.
+	It makes parsing much simpler.
+
+	E.g.
+
+	output [2:0] a, b;
+	input c, d;
+	wire [2:0] a, b;
+	wire c, d;
+
+	becomes:
+
+	output [2:0] a;
+	output [2:0] b;
+	input c;
+	input d;
+	wire [2:0] a;
+	wire [2:0] b;
+
+	This makes the 'gmake ioplace' step in encounter in the Paradice flow work on
+	Synopsys output.
+
+3.0.8 2004-11-22  Erwin
+	* Bugfix : creation of unique escaped names.
+	* Update parser/writer : support all net types (included: tri, tri0, tri1, triand,
+	  trior, trireg, wor, wand).
+	* logging : replaced NOTICE by INFO.
+	* New command -pulluppin : pull pins to top level, pins are merged up in the hierarchy.
+
+	example:
+
+	MODULE a
+	{
+		// this will pull up pins Q and DBUS to toplevel.
+		-pulluppin Q DBUS
+	}
+
+3.0.7 2004-09-27 Erwin
+	* verilog driver : write date and user name in header.
+	* verilog driver : write first port and then net declarations.
+
+3.0.6 2004-07-01 Erwin
+	* veredit.G : possible to parse edit file without verilog netlist.
+	* src/*.cc : print all messages to stdout instead of stderr.
+
+3.0.5 2004-04-29 Erwin
+	* new command -bufferassigns : This statement will replace simple single
+	 bit continuous assigns with a buffer.
+	 The statement assumes that the buffer has an input pin "A" and output pin "Z".
+
+	example:
+
+	MODULE *
+	{
+	 -bufferassigns bfx1
+	}
+
+
+3.0.4 2004-04-07 Erwin
+	* bugfix : The 'others' pins added by commands -tiecell, -insertobsoutput and
+	  -insertobsinput are now unique in memory, which enables editing right away.
+	  Earlier they were all pointers to the same object. Editing one resulted in
+	  changing all instances.
+
+3.0.3 2004-01-13 Erwin
+	* new command -bufferinput : Insert a buffer before an input.
+	* options -ifspec and -install : Optional module list specification.
+
+3.0.2 2003-11-18 Erwin
+	* bugfix hierarchy : write modules only once.
+
+3.0.1 2003-11-12 Erwin
+	* new command -modinst, Modify instance : The command -modinst works the same as
+	  -addinst with the exception that it will never add a new instance if it
+	  doesn't exist and it will issue a warning if the instance doesn't exist.
+	* bugfix hierarchy : Hierarchy is only build at the end when option -top is used. This
+	  fixes a bug that hierarchy that is added via -addinst is also written out.
+
+3.0.0 2003-10-30 Erwin
+	* veredit.G, hierarchy.cc : build hierarchy structure of netlist.
+	* verilog driver : write netlist with certain top module, specified with option -top.
+	* verilog parser/driver : full support of port syntax.
+	* verilog driver : bugfix writing ordered connections of instance.
+	* New option for -tiecell command : -exclude to exclude certain pins from tieing to a tiecell.
+	  For instance testpins si and ssi.
+
+	  example:
+	 
+	  MODULE * 
+	  {
+	   -tiecell hive_misc_tiedown
+	   -output  zero_out
+	   -other   .clk(clk), .rst(rst)
+	   -net 1'b0
+	   -exclude si ssi ssi_q
+	  }
+
+2.1.2 2003-09-04 Erwin Waterlander <erwin.waterlander@philips.com>
+	* verilog driver : write continuous assigns after port and net declarations,
+	   otherwise Cadence tools can't deal with it.
+
+2.1.1 Aug 1 2003 Erwin
+	* added an extra optional option -keepmodname to -addinst.
+	  This will prevent that the module name of the instance is modified.
+	  Then the module name of the instance is a don't care.
+
+	  Example:
+	  
+	  MODULE top
+	  {
+	  	-addinst -keepmodname
+	  	module_Y inst_2 (.a(a));
+	  }
+
+2.1.0 Jul 14 2003 Erwin
+	* parser/writer update:
+	  o) instantiations may mix with port/net declarations, assigns and ohter module items.
+	  o) initial statements are written out.
+	  o) defparam statements are written out.
+
+2.0.4 May 22 2003 Erwin
+	* new option:
+	  -edt [<module list>]       : write ED&T library.
+
+2.0.3 Jan 13 2003 Erwin
+
+	* parser ignores simple 'initial' statements like:
+	  initial $diesel("../diesel/diesel.cmd");
+
+2.0.2 Dec 6 2002 Erwin
+	* upgrade to c3po 0.20.18 for compatibility with gcc >= 3.0.
+	  See also INSTALL and Config.h.
+
+	* New command: create a shell around a module.
+	  Example:
+
+
+	  MODULE top
+	  {
+	    -shell top_shell
+	  }
+
+	* Extra optional switch added to -delete: -empty.
+	  With -empty the module is only deleted if it has no
+	  instances an no continuous assigns.
+
+	  Example:
+
+
+	  MODULE *
+	  {
+	    -delete -empty
+	  }
+
+
+
+2.0.1  Nov 26 2002
+	* bugfix writing identifier MODULE.
+
+2.0.0  Nov 25 2002 Erwin
+
+	* *** === Incompatible Change === ***
+		    -------------------
+	 The keywords of the Veredit script language have been changed.
+	 They now all start with a minus and are lower case. It is also
+	 not needed anymore to close a command, as for instance was done
+	 with `END ADDINST'. See file README.
+	 
+	 This change was needed, because the old keywords could cause
+	 conflicts with legal Verilog identifiers. For instance there were
+	 conflicts if one used identifiers like `END' or `OTHER' in the netlist.
+	 This new style keywords will also prevent conflicts in the future.
+
+	 For your convenience a shell script is made available to convert old style
+	 Veredit scripts to the new style: 1xto2x.sh.
+	 Please backup your old scripts and check the output of this script.
+
+	 There has been no functional change in Veredit 2.0.0.
+
+
+1.3.0  Nov 11 2002 Erwin
+	* The modulename in the Veredit script may contain one or more
+	   asterisk wildcard characters `*', so one can apply edits
+	   on more than one module.
+
+	* Insert tie cells.
+
+	MODULE *
+	{
+	   TIECELL tie_down
+	   OUTPUT Z
+	   OTHER .rst_n(rst_n)
+	   NET 1'b0
+
+	   TIECELL tie_up
+	   OUTPUT Z
+	   OTHER .rst_n(rst_n)
+	   NET 1'b1
+	}
+
+
+	* INSERTOBSINPUT and INSERTOBSOUTPUT:
+	   The construct
+	      OTHER <other pins that must be connected>
+	   is now optional.
+
+1.2.2  Jul 5 2002 Erwin
+	* upgrade to c3p 0.20.16 for bison compatibility bugfix
+
+1.2.1  Jul 2 2002 Erwin
+
+	* bugfix INSERTOBSINPUT and INSERTOBSOUTPUT on single bits from a vector.
+	  Thanks to Greg Ehmann.
+
+	  e.g.
+	  INSERTOBSINPUT mx21x1
+	    INPUT D1
+	    OUTPUT Z
+	    OTHER .D0(new_si), .S0(mysig)
+	    NETS si[0]
+
+	  would not edit a module port connection such as:
+	  .si({si, ssi[1]})
+
+	  Now veredit will generate .si({ { si[1], si_0 }, ssi[1] })
+	  when si is declared as two bits wide.
+
+	* bugfix when a subrange of a vector is specified
+	    (e.g. si[1:0] while the declared vector is si[2:0])
+	    with INSERTOBSINPUT and INSERTOBSOUTPUT NETS.
+	* Allow to omit vector index in INSERTOBSINPUT and INSERTOBSOUTPUT NETS.
+
+	* New function: List instances connected to a certain net.
+
+	  This function is unfinished work and works only correct on single nets
+	  that are not part of a vector.
+
+	  example:
+
+	MODULE rdt_router_data
+	{
+	  LISTINST
+	  NET clk
+	  END
+	}
+
+1.2.0  Apr 17 2002 Erwin
+	* *** === Incompatible Change === ***
+		    -------------------
+	    Use keyword '-ALL' instead of 'ALL' in commands DELPORTS, DELINST and DELASSIGN
+	    to apply on all items.  See also README file.
+	    ALL is a valid Verilog signal name.
+
+	* bugfix syntax
+	    'range' object moved from 'signal_declarator' to 'declaration'.
+
+	    This also fixes a bug in the ADDPORTS command.
+	    ADDPORTS
+	     input [3:0] signala, signalb;
+	    END ADDPORTS
+	    does now correctly add two vectors.
+
+	* bugfix DELPORTS
+	  remove wires fixed. Wires were not always removed.
+
+	* new command: RMPORTS: Remove ports and add wires.
+	  See README file.
+
+	* syntax update: continuous assigns can now mix with port and net
+	  declarations. E.g.:
+
+	    input a;
+	    assign b = a;
+	    wire [1:0] c;
+	    output b
+
+	* write compiler directives in output verilog.
+
+	* added driver for MPC install files (option -install).
+	  MPC = Multi Purpose network Compiler
+	  see https://sourceforge.net/projects/mpsc
+
+	* added driver for GenTB ifspec files (option -ifspec).
+	  GenTB = Generate TestBench
+
+	* Updated README.
+
+	* added more tests in testdir.
+
+	* added extra writeSet template to avoid problems with linking
+	  of static functions in different files that have the same arguments,
+	  but are invoked via the same template function.
+	  Linking with gcc appears to behave different on different systems (HP, SUN, Linux).
+	  On Linux and Sun you can get that the wrong function is linked.
+
+	* On some systems there are compilation problems, because Imake is not
+	  configured for C++. Some helpful information is added in file Imake-troubles.ps.
+
+	* Default static linking on HP-UX and SunOS. See Config.h
+
+1.1.9.1  Feb 18 2002 Erwin
+	* bugfix verilog driver: write port object
+
+1.1.9 Dec 13 2001 Erwin
+	* upgrade to c3po 0.20.15
+	* add -distr option in Generate
+
+1.1.8 Apr 25 2001 Erwin
+
+	* upgrade from c3po 0.19.5 to 0.20.10
+	  see upgrade.sh
+
+	* Config.h: update for compilation on other
+	  than HP-UX systems.
+
+1.1.7 Apr 19 2001 Erwin
+
+	* grammar bugfix: parsing of C comment /** **/
+	* grammar update: empty port_list
+	* grammar and driver update: (wire) assignments.
+
+	* veredit now also supports:
+
+	wire b = 0;
+	wire [1:0] a = {1'b1, b};
+	wire [10:0] c = "00000111111";
+
+	assign b = {1'b1, b};
+	assign f = "00";
+
+	  Thanks Stefan Thiede
+
+1.1.6beta Aug 3 2000 Erwin
+	* insert observe modules (Module.cc)
+
+	MODULE aaa
+	{
+	   INSERTOBSINPUT dft_obs_ctrl_comb
+		INPUT D 
+		OUTPUT Q 
+		OTHER .CP(mmio_clk), .HOLD(hold_inputs)
+		NETS mmio_rst_an pi_sel[2:0] pi_tout
+
+	   INSERTOBSOUTPUT dft_obs_ctrl_ff
+		INPUT D
+		OUTPUT Q
+		OTHER .CP(mmio_clk), .HOLD(hold_inputs)
+		NETS pi_ack[2:0] mmio_abort_all
+	}
+
+
+1.1.5 Oct 4 1999 Erwin
+	* improved command line options
+
+1.1.4  Sep 30 1999 Erwin
+	* grammar update, portmap_element has *optional* signal_list.
+
+1.1.3  Sep 21 1999 Erwin
+	* added BUFFER feature:
+	  insert buffer behind cell (single bit only so far)
+
+1.1.2  Sep 20 1999 Erwin
+	* bugfix Buffer reentrant outputs.
+
+1.1.1  Sep 7 1999 Erwin
+	* remove buffer tree. Unfinished.
+
+1.1.0  Jul 28 1999 Erwin
+	* New edit feature: Buffer reentrant outputs.
+	  See README for description.
+
+1.0.18  Jul 7 1999 Erwin Waterlander
+	* bugfix driver assign_list
+	* added ADDASSIGN and DELASSIGN edit features.
+
+	   Example:
+	
+	MODULE clkbuf
+	{
+	   DELASSIGN
+	     assign clkout = TQ[5] ;
+	   END DELASSIGN
+	   
+	   ADDASSIGN
+	     assign clkout[3:0] = TD[7:4] ;
+	     assign clkout[10:9] = wat[1:0];
+	     assign a = b ;
+	   END ADDASSIGN
+	}
+
+1.0.17  Jul 1 1999 Erwin Waterlander
+	* some extra warnings
+
+1.0.16  Jun 30 1999 Erwin Waterlander
+	* /* */ comment
+	* treat lines beginning with "`" as comment.
+	* ADDINST can modify cellName.
+
+1.0.15  Jun 30 1999 Erwin Waterlander
+	* Updated assign_statement grammar and driver
+
+1.0.14  Jun 30 1999 Erwin Waterlander
+	* Bugfix delete all instances in combination with add instances.
+
+1.0.13  Jun 25 1999 Erwin Waterlander
+	* Better formating Verilog output.
+
+1.0.12  Jun 22 1999 Erwin Waterlander
+	* Bugfix delete all instances. 
+
+1.0.11  Jun 22 1999 Erwin Waterlander
+	* Build in check for duplicate ports/declarations for ADDPORTS.
+
+1.0.10  Jun 22 1999 Erwin Waterlander
+	* Delete modules
+	* Delete all instances
+
+	   Example:
+	
+	   MODULE cpa_pkc_macro 
+	   {
+	      DELETE
+	   }
+	
+	   MODULE clkbuf
+	   {
+	      DELINST
+	         ALL
+	      END DELINST
+	   }
+
+
+1.0.9  Jun 15 1999 Erwin Waterlander
+	* Added 'connections by order' to grammar and driver of object 'instance'.
+
+1.0.8  Jun 14 1999 Erwin Waterlander
+	* Changed veredit.G for editfile.
+	* Made HandleSet.h templates.
+	* Better readable Verilog output.
+
+1.0.7  Jun 9 1999 Erwin Waterlander
+	* Extended DELINST option.
+	    Can delete single portmaps of instance now if they
+	    are specified. If no port_maps are specified the
+	    complete instance is removed.
+	
+	   Example:
+	
+	   DELINST
+	    MACRO_IOP MACRO_IOP_inst ();       // remove complete instance
+	    MACRO_MT MACRO_MT_inst (.A(A),     // remove 3 pins from instance
+	          .B0(B0), .A(Z));
+	   END DELINST
+
+
+1.0.6  Jun 9 1999 Erwin Waterlander
+	* Added new edit feature:
+	    DELPORTS, delete ports from module.
+	    (wires are also deleted.)
+	    
+	   Example:
+	
+	   MODULE cpa_bs
+	   {
+	     DELPORTS
+	       TCP_CAS, TCP_WE, boot
+	     END DELPORTS
+	   }
+
+1.0.5  Jun 9 1999 Erwin Waterlander
+	* Bugfix grammar editfile.
+
+1.0.4  Jun 9 1999 Erwin Waterlander
+	*  Added new edit features:
+	   ADDPORTS, add ports to module.
+	   ADDINST, add instance to module or add or change
+	     port connections to/of existing instance
+	   DELINST, delete instance from module.
+
+	   Example:
+	
+	   MODULE cpa_bs
+	   {
+	   INSTANCE MACRO_DBESS_inst = MACRO_DBESS_inst // MACRO_DBESS
+	   INSTANCE MACRO_IOP_inst = MACRO_IOP_inst // MACRO_IOP
+	   INSTANCE MACRO_MT_inst = MACRO_MT_inst // MACRO_MT
+	   
+	   ADDPORTS
+	     input Aap,Noot ;
+	     output [2:0] Banaan;
+	     inout Boom ;
+	     wire [2:0] Banaan;
+	   END ADDPORTS
+	   
+	   ADDINST
+	     hiep hoi (.A(hoe),.Z(ra)) ;
+	     MACRO_MT MACRO_MT_inst (.Z(koe), .B(varken));
+	   END ADDINST
+	   
+	   DELINST
+	     aap noot ();
+	     MACRO_IOP MACRO_IOP_inst ();
+	   END DELINST
+	   
+	   }
+
+
+1.0.3  Jun 7 1999 Erwin Waterlander
+	*  Added 'assign' statement to grammar and Verilog driver.
+
+1.0.2  Jun 4 1999 Erwin Waterlander
+	*  Bugfix -writeDot option
+
+1.0.1  Jun 4 1999 Erwin Waterlander
+	* Added -writeDot option (idea of Marcel Oosterhuis)
+
+	  With this option veredit generates a Dotty input file
+	  that shows the hierarchy of the verilog netlist.
+	  All declared modules are included. If option -leafCells
+	  is also used, all instantiated modules are included.
+	
+	  Note that library cells can be removed with the
+	  -novermod option of 'dino'.
+	
+	  To convert the output to postscript type:
+	  dot -Tps -Gsize="7.5,10" foo.dot > foo.ps
+

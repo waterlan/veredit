@@ -1,0 +1,105 @@
+// veredit version : 3.0.8 beta3 (Nov 22 2004)
+// creation date   : Mon Nov 22 13:26:02 2004
+// user            : waterlan
+
+module BUFFER( X, A );
+output X;
+input A;
+
+endmodule
+
+module a_sub( Q, D, DBUS, vv );
+output Q;
+input D;
+output [4:1] DBUS;
+input [9:0] vv;
+
+endmodule
+
+module a( TEST, Q, Z, Z2, T, A, B, X, II, vv, D, DBUS );
+input TEST;
+output Z;
+output Z2;
+output T;
+output [2:5] X;
+input [15:0] Q;
+input A, B;
+input II;
+input [9:0] vv;
+input D;
+output [4:1] DBUS;
+
+   a_sub i0 ( .Q(Q), .vv(vv), .D(D), .DBUS(DBUS));
+endmodule
+
+module b( Q, Z, Z2, T, A, B, C, D, II );
+output Z;
+output Z2;
+output T;
+output [15:0] Q;
+input A;
+input B;
+input C;
+input D;
+input II;
+
+endmodule
+
+module c( W, Z, Z2, T, A, B, C, D, X, Y, II, vv, DBUS );
+output Z;
+output Z2;
+output T;
+input [7:0] W;
+input [2:5] X;
+input [2:5] Y;
+input A;
+input B;
+input C;
+input D;
+input II;
+input [9:0] vv;
+output [4:1] DBUS;
+wire f, g, h, i, j, k, l;
+
+   and2x1 inst1 ( .Z(f), .A(A), .B(B));
+   and2x1 inst2 ( .Z(g), .A(f), .B(C));
+   and2x1 inst3 ( .Z(T), .A(f), .B(g));
+   and2x1 inst4 ( .Z(Z), .A(D), .B(g));
+   a_sub i0 ( .Q(Q), .vv(vv), .D(D), .DBUS(DBUS));
+   b_sub i1 ( .Q(Q), .vv(vv), .D(T), .DBUS(DBUS));
+endmodule
+
+module test( X, Q, T, Z, Z2, A, B, II, \III , vv, D, DBUS );
+output Z;
+output [2:5] X;
+output [15:0] Q;
+output Z2;
+output [1:0] T;
+input A;
+input B;
+input II;
+input \III ;
+input [9:0] vv;
+input D;
+output [4:1] DBUS;
+wire \AA ;
+tri \TT ;
+tri0 \T0 ;
+tri1 T1;
+trior TOR;
+triand TAND;
+wor Wor;
+wand WANDJE;
+tri VCC;
+
+   a inst_a ( .TEST(), .Q(Q), .Z(Z), .Z2(Z2), .T(T[1]), .A(A), .B(T[0]), .X(X),
+      .II(II), .vv(vv), .D(D_0), .DBUS(DBUS));
+   b Z2_inst ( .Q(Q), .Z(Q_0), .Z2(T_0), .T(T[0]), .A(Z), .B(Z2), .C(Q[1]), .D(T[1]),
+      .II(II));
+   c inst_C ( .W({ Z2, T[1], { T[1], T[0] }, Q[3], { Q[2], Q[1], Q[0] } }), .X({ X[2], X[3],
+      X[4], X[5] }), .Y(Xx), .II(II), .III(\III_0 ), .vv(vv), .D(D_0), .DBUS(DBUS));
+   bfx1 \AA_inst   ( .Z(\AA ), .A(\TT ));
+   bfx1 D_inst ( .Z(D_0), .A(D));
+   bfx1 \III_inst   ( .Z(\III_0 ), .A(\III ));
+endmodule
+

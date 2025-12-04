@@ -1,0 +1,35 @@
+// veredit version : 3.0.13 (Aug 4 2006)
+// creation date   : Fri Aug  4 17:34:50 2006
+// user            : waterlan
+
+module a( z, a );
+input a;
+output z;
+
+   bfx1 z_inst ( .Z(z), .A(a));
+endmodule
+
+module b( z, a );
+input a;
+output z;
+
+   BUF z_inst ( .Z(z), .I(a_0));
+   BUFF a_inst ( .O(a_0), .I(a));
+endmodule
+
+module c( z, a );
+input a;
+output z;
+
+   BUFC z_inst ( .X(z_0), .I(a));
+   BUFDD z_inst_0 ( .Z(z), .I(z_0));
+endmodule
+
+module d( z, a );
+input a;
+output z;
+
+   BUFD z_inst ( .X(z_0), .A(a));
+   BUFDD z_inst_0 ( .Z(z), .A(z_0));
+endmodule
+

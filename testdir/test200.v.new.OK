@@ -1,0 +1,60 @@
+// veredit version : 3.0.7 (Sep 27 2004)
+// creation date   : Fri Sep 24 14:31:08 2004
+// user            : waterlan
+
+module bfx4( A, Z );
+input A;
+output Z;
+
+   assign Z = A ;
+
+endmodule
+
+module MODULE( END, INPUT, OTHER, NET, .a({ a, b, c }), d, e );
+input [4:0] END;
+input INPUT;
+output OTHER;
+output [2:1] NET;
+output a, b, c;
+inout [12:0] d, e;
+wire [4:0] END;
+wire [12:0] d, e;
+wire g, h;
+wire [9:0] i;
+
+   initial_cell ic_0 ( .A(1'b0), .Z(notconnected));
+   cell_initial ic_1 ( .A(1'b0), .Z(notconnected));
+   initial_cell ic_01 ( .A(1'b0), .Z(notconnected));
+   cell_initial ic_11 ( .A(1'b0), .Z(notconnected));
+   TIECELL NETS ( .Z(1'b1), .X({ g, h, i }));
+   insta i0 ( .OUTPUT(NET), .DELASSIGN(ASSIGN), .ADDINST(MODULE), .BUFFEROUTPUTS(BUFFER),
+      .INSERTOBSINPUT(times), .z1(c), .z2(p), .INSERTOBSOUTPUT(LISTINST),
+      .INSTANCE(DELETE), .X({ g, h, i }), .END(END));
+   initial_cell ic_2 ( .A(1'b0), .Z(notconnected));
+   cell_initial ic_3 ( .A(1'b0), .Z(notconnected));
+   initial $diesel("../diesel/diesel.cmd");
+   initial
+$diesel("../diesel/diesel.cmd");
+   initial $diesel("../diesel/diesel.cmd");
+endmodule
+
+module MOD_debug( END, INPUT, OTHER, NET, .a({ a, b, c }), d, e, si );
+input [4:0] END;
+input INPUT;
+output OTHER;
+output [2:1] NET;
+output a, b, c;
+inout [12:0] d, e;
+input [6:0] si;
+wire [4:0] END;
+wire [2:1] NET;
+wire [12:0] d, e;
+wire [6:0] si;
+
+   MODULE MODULE_inst ( .END({ END[4], END[3], END_2, END_1, END_0 }), .INPUT(INPUT),
+      .OTHER(OTHER), .NET(NET), .a(a), .b(b), .c(c), .d(d), .e(e));
+   obs_mod END_2_inst ( .Z(END_2), .A(END[2]), .clk(clk), .rst_n(rst_n));
+   obs_mod END_1_inst ( .Z(END_1), .A(END[1]), .clk(clk), .rst_n(rst_n));
+   obs_mod END_0_inst ( .Z(END_0), .A(END[0]), .clk(clk), .rst_n(rst_n));
+endmodule
+

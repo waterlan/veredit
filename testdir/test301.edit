@@ -1,0 +1,19 @@
+MODULE a
+{
+	-addinst buf i0 (.z(z), .a(x));
+	-modinst buf i0 (.a(a));
+}
+
+
+MODULE b
+{
+	-addinst buf i0 (.z(z), .a(x));
+	-modinst buf i1 (.a(a));
+}
+
+MODULE c
+
+{
+
+	-addinst b i2 (.z(z[1]), .a(a[0]));
+}

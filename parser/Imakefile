@@ -1,0 +1,80 @@
+XCOMM Copyright (C) 1999-2025  Erwin Waterlander
+XCOMM Copyright (C) 1999       Ondrej Popp
+XCOMM All rights reserved.
+XCOMM 
+XCOMM Redistribution and use in source and binary forms, with or without
+XCOMM modification, are permitted provided that the following conditions
+XCOMM are met:
+XCOMM 
+XCOMM 1. Redistributions of source code must retain the above copyright
+XCOMM    notice, this list of conditions and the following disclaimer.
+XCOMM 2. Redistributions in binary form must reproduce the above copyright
+XCOMM    notice in the documentation and/or other materials provided with
+XCOMM    the distribution.
+XCOMM 
+XCOMM THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY
+XCOMM EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+XCOMM IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+XCOMM PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE
+XCOMM FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+XCOMM CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+XCOMM OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+XCOMM BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+XCOMM WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+XCOMM OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
+XCOMM IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#define CONFIG_TOP
+#include "../Config.h"
+#undef CONFIG_TOP
+
+GEN_SRCS =
+
+PROTECTED_SRCS =
+
+SRCS = $(GEN_SRCS) $(PROTECTED_SRCS) veredit.y veredit_y.cc veredit.l veredit_l.cc $(EXTRA_SRCS)
+
+OBJS = veredit_y.o veredit_l.o $(GEN_SRCS:.cc=.o) $(PROTECTED_SRCS:.cc=.o) $(EXTRA_SRCS:.cc=.o)
+
+GEN_HDRS =
+
+PROTECTED_HDRS =
+
+INCLUDE_FILES = $(GEN_HDRS) $(PROTECTED_HDRS)
+
+INCLUDES = -I.. -I../src -I../util -I../objects
+
+CXXOPTIONS = $(CXX_PARSER_OPTIONS)
+
+PARSER = bison
+PARSER_FLAGS = -y -d
+
+SCANNER = flex
+SCANNER_FLAGS = 
+
+TGTPATH = ../$(OBJDIR)
+
+vpath %.o $(TGTPATH)
+
+NormalLibraryTarget(parser,$(OBJS))
+DependTarget()
+
+
+veredit_y.cc veredit.h : veredit.y
+	$(PARSER) $(PARSER_FLAGS) veredit.y
+	sed s/yy/veredit_yy/g <y.tab.c >veredit_y.cc
+	sed s/yy/veredit_yy/g <y.tab.h >veredit.h
+
+veredit_l.cc : veredit.l veredit.y
+	$(SCANNER) $(SCANNER_FLAGS) veredit.l
+	sed s/yy/veredit_yy/g <lex.yy.c >veredit_l.cc
+
+clean ::
+	rm -f veredit_y.cc veredit.output y.tab.c y.output
+	rm -f veredit_l.cc veredit.h y.tab.h lex.yy.c
+	rm -f *.tmp*
+
+#define CONFIG_BOT
+#include "../Config.h"
+#undef CONFIG_BOT
+

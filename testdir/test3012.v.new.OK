@@ -1,0 +1,22 @@
+// veredit version : 3.0.12 (Mar 30 2006)
+// creation date   : Thu Mar 30 10:50:48 2006
+// user            : waterlan
+
+module test1( Z, A, B );
+output Z;
+input A;
+input B;
+wire [1:0] bb;
+wire d;
+supply0 zero2;
+wire [2:0] Banaan;
+
+endmodule
+
+module test2( Z, A, B );
+output Z;
+input A;
+input B;
+
+endmodule
+

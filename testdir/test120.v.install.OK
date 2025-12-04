@@ -1,0 +1,40 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 11:59:13 2025
+// user            : waterlan
+
+CELL clkbuf()
+{
+   IN "clkin"
+   OUT "clkout"
+
+   text generator = "clkbuf"
+   GENERATOR = generator
+   INSTNAME = UNIQUE_NAME(generator)
+}
+
+CELL MACRO_MT1()
+{
+   IN "clk"
+   IN "aap"
+   OUT BUS W=3 "banaan"
+   INOUT "ui"
+   OUT BUS W=3 "appel"
+   OUT BUS W=3 "mmmm"
+
+   text generator = "MACRO_MT1"
+   GENERATOR = generator
+   INSTNAME = UNIQUE_NAME(generator)
+}
+
+CELL MACRO_MT2()
+{
+   IN "clk"
+   IN "aap"
+   OUT BUS W=3 "banaan"
+   OUT "appel"
+
+   text generator = "MACRO_MT2"
+   GENERATOR = generator
+   INSTNAME = UNIQUE_NAME(generator)
+}
+

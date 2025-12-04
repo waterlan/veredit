@@ -1,0 +1,26 @@
+module buffer (z, a);
+input a;
+output z;
+
+endmodule
+
+module vbuffer (z, a);
+input [1:0] a;
+output [1:0] z;
+
+
+  buffer i0 (.z(z[0]), .a(a[0]));
+  buffer i1 (.z(z[1]), .a(a[1]));
+
+endmodule
+
+
+module xbuffer (z, a);
+input [2:0] a;
+output [2:0] z;
+
+
+  vbuffer i0 (.z({z[1], z[0]}), .a({a[1], a[0]}));
+  buffer i1 (.z(z[2]), .a(a[2]));
+
+endmodule

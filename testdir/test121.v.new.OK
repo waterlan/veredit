@@ -1,0 +1,54 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 12:08:59 2025
+// user            : waterlan
+
+module core( clk, mtl_clk, hold_inputs, hold_outputs, clk_testshell, ssi, sso,
+      si, so, se, sx, sy, sz, new_si, mysig );
+input clk;
+input mtl_clk;
+input hold_inputs;
+input hold_outputs;
+input clk_testshell;
+input [1:0] ssi;
+output [1:0] sso;
+input [1:0] si;
+output [1:0] so;
+input [3:0] sx;
+output [3:0] sy;
+output sz;
+input se;
+input new_si;
+input mysig;
+wire [1:0] ssi;
+wire [1:0] sso;
+wire [1:0] si;
+wire [1:0] so;
+wire [3:0] sx;
+wire [3:0] sy;
+
+   ip_top_b1_scan_2 x1 ( .clk(clk), .mtl_clk(mtl_clk), .he(hold_outputs), .si({ { si[1],
+      si_0 }, ssi[1] }), .so({ inscan_net_16, inscan_net_8, inscan_net_12 }), .se(se));
+   xxx x3 ( .so({ { so[1], so_0 }, sso[1] }), .sx({ { sx_3_0, sx_2, sx_1 }, ssx[0] }), .s(sx_3),
+      .sy({ { sy[3], sy_2, sy_1 }, ssy[0] }), .sz(sz_0));
+   ip_top_b1_scan_1 x2 ( .clk(clk), .mtl_clk(mtl_clk), .he(hold_outputs), .si({ inscan_net_16,
+      inscan_net_8, inscan_net_12 }), .so({ inscan_net_17, inscan_net_9,
+      inscan_net_13 }), .se(se));
+   core_df_wrapper_0 antiskewInst_0 ( .data_in(inscan_net_5), .data_out(sso[0]),
+      .clock(clk_testshell));
+   core_df_wrapper_0 antiskewInst_1 ( .data_in(inscan_net_13), .data_out(sso[1]),
+      .clock(clk));
+   core_df_wrapper_0 antiskewInst_2 ( .data_in(inscan_net_9), .data_out(so_0),
+      .clock(clk));
+   core_df_wrapper_0 antiskewInst_3 ( .data_in(inscan_net_17), .data_out(so[1]),
+      .clock(mtl_clk));
+   MX21 si_0_inst ( .Z(si_0), .D1(si[0]), .D0(new_si), .S0(mysig));
+   MX21 sx_3_inst ( .Z(sx_3_0), .D1(sx[3]), .D0(new_si), .S0(mysig));
+   MX21 sx_2_inst ( .Z(sx_2), .D1(sx[2]), .D0(new_si), .S0(mysig));
+   MX21 sx_1_inst ( .Z(sx_1), .D1(sx[1]), .D0(new_si), .S0(mysig));
+   MX21 sx_0_inst ( .Z(sx_0), .D1(sx[0]), .D0(new_si), .S0(mysig));
+   MX21 so_0_inst ( .Z(so[0]), .D1(so_0), .D0(new_si), .S0(mysig));
+   MX21 sy_2_inst ( .Z(sy[2]), .D1(sy_2), .D0(new_si), .S0(mysig));
+   MX21 sy_1_inst ( .Z(sy[1]), .D1(sy_1), .D0(new_si), .S0(mysig));
+   MX21 sz_inst ( .Z(sz), .D1(sz_0), .D0(new_si), .S0(mysig));
+endmodule
+

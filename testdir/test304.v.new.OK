@@ -1,0 +1,37 @@
+// veredit version : 3.0.18 (Feb 29 2012)
+// creation date   : Wed Dec  3 16:17:06 2025
+// user            : waterlan
+
+module aa( a, z, in_rst, clk );
+input in_rst, clk;
+input a;
+output z;
+
+   an2x i0 ( .A(tiedown_tienet), .B(a_0), .Z(z_0));
+   tiedown tiedown_inst ( .zero_out(tiedown_tienet), .clk(clk), .rst(in_rst));
+   obs_mod z_inst ( .Q(z), .D(z_0), .clk(clk), .reset(in_rst));
+   obs_mod a_inst ( .Q(a_0), .D(a), .clk(clk), .reset(in_rst));
+endmodule
+
+module ab( a, z, in_rst, clk );
+input in_rst, clk;
+input a;
+output z;
+
+   an2x i0 ( .A(tiedown_tienet), .B(a_0), .Z(z_0));
+   tiedown tiedown_inst ( .zero_out(tiedown_tienet), .clk(clk), .rst(in_rst));
+   obs_mod z_inst ( .Q(z), .D(z_0), .clk(clk), .reset(in_rst));
+   obs_mod a_inst ( .Q(a_0), .D(a), .clk(clk), .reset(in_rst));
+endmodule
+
+module cc( a, z, in_reset, in_clock );
+input in_clock, in_reset;
+input a;
+output z;
+
+   an2x i0 ( .A(XXX), .B(a_0), .Z(z_0));
+   tiedown tiedown_inst ( .zero_out(XXX), .clk(in_clock), .rst(in_reset));
+   obs_mod z_inst ( .Q(z), .D(z_0), .clk(in_clock), .reset(in_reset));
+   obs_mod a_inst ( .Q(a_0), .D(a), .clk(in_clock), .reset(in_reset));
+endmodule
+

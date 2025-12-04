@@ -1,0 +1,21 @@
+// veredit version : 3.0.7 (Sep 27 2004)
+// creation date   : Fri Sep 24 14:31:08 2004
+// user            : waterlan
+
+module test( a, b, c, d, e, f );
+output d;
+input [2:0] f;
+output [2:0] e;
+input c;
+output a;
+input b;
+wire a;
+wire d;
+
+   assign a = b ;
+   assign e = f ;
+
+   i1 buf ( .z(d), .a(c));
+   i0 buf ( .z(d), .a(c));
+endmodule
+

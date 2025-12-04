@@ -1,0 +1,42 @@
+MODULE does_not_exist
+{
+  -shell f_debug
+}
+
+MODULE MODULE 
+{
+  -shell MOD_debug
+}
+
+MODULE MOD_debug
+{
+   -insertobsinput obs_mod
+	-input A
+	-output Z
+	-other .clk(clk), .rst_n(rst_n)
+	-nets END[2:0]
+}
+
+MODULE *
+{
+  -delete -empty
+}
+
+MODULE buf*
+{
+  -delete
+}
+
+MODULE MOD_debug
+{
+   -addports
+	  input [5:0] si ;
+	  wire  [5:0] si ;
+	
+	-delports si
+	
+	-addports
+	  input [6:0] si ;
+	  wire  [6:0] si ;
+	
+}

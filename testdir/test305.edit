@@ -1,0 +1,5 @@
+MODULE *
+{
+	-bufferassigns bfx1
+}
+

@@ -1,0 +1,7 @@
+MODULE top
+{
+
+	-addinst module_X inst_1 (.a(b));
+
+	-addinst -keepmodname module_Y inst_2 (.a(a));
+}

@@ -1,0 +1,32 @@
+MODULE a_sub
+{
+	-addports 
+	 input [9:0] vv;
+	-pulluppin Z vv D
+}
+
+MODULE a_sub
+{
+	-pulluppin DBUS
+}
+
+MODULE c
+{
+	-modinst b_sub i1(.D(T));
+	-addports
+	 input  A;
+}
+
+MODULE test
+{
+	-bufferassigns bfx1
+
+	-insertobsinput bfx1
+	-input A
+	-output Z
+	-nets D \III 
+
+	-addports tri VCC ; 
+
+}
+

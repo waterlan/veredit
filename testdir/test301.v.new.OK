@@ -1,0 +1,26 @@
+// veredit version : 3.0.7 (Sep 27 2004)
+// creation date   : Fri Sep 24 14:31:08 2004
+// user            : waterlan
+
+module a( a, z );
+input a;
+output z;
+
+   buf i0 ( .z(z), .a(a));
+endmodule
+
+module b( a, z );
+input a;
+output z;
+
+   buf i0 ( .z(z), .a(x));
+endmodule
+
+module c( a, z );
+input [1:0] a;
+output [1:0] z;
+
+   a i1 ( .z(z[0]), .a(a[0]));
+   b i2 ( .z(z[1]), .a(a[0]));
+endmodule
+

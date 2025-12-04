@@ -1,0 +1,937 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Veredit</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body>
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSYS">SYNOPSYS</a>
+    <ul>
+      <li><a href="#Options">Options</a></li>
+      <li><a href="#Edit-Statements">Edit Statements</a></li>
+    </ul>
+  </li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#HISTORY">HISTORY</a></li>
+  <li><a href="#REFERENCES">REFERENCES</a></li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EDIT-STATEMENTS-SYNTAX">EDIT-STATEMENTS SYNTAX</a>
+    <ul>
+      <li><a href="#Buffer-reentrant-outputs">1 Buffer reentrant outputs</a></li>
+      <li><a href="#Insert-a-buffer-or-inverter-behind-a-cell-output">2 Insert a buffer (or inverter) behind a cell output</a></li>
+      <li><a href="#Insert-a-buffer-or-inverter-before-a-cell-input">3 Insert a buffer (or inverter) before a cell input</a></li>
+      <li><a href="#Adding-input-or-output-observe-modules">4 Adding input or output observe modules</a></li>
+      <li><a href="#Adding-tie-cells">5 Adding tie cells</a></li>
+      <li><a href="#List-instances-connected-to-a-certain-net">6 List instances connected to a certain net</a></li>
+      <li><a href="#Adding-a-module">7 Adding a module</a></li>
+      <li><a href="#Deleting-a-module">8 Deleting a module</a></li>
+      <li><a href="#Add-ports-or-net-declarations-to-a-module">9 Add ports or net-declarations to a module</a></li>
+      <li><a href="#Deleting-ports-or-net-declarations-from-a-module">10 Deleting ports or net-declarations from a module</a></li>
+      <li><a href="#Modify-instance-names">11 Modify instance names</a></li>
+      <li><a href="#Add-Modify-instances-or-module-connections">12 Add/Modify instances or module connections</a></li>
+      <li><a href="#Modify-instances-or-module-connections">13 Modify instances or module connections</a></li>
+      <li><a href="#Delete-instances-or-module-connections">14 Delete instances or module connections</a></li>
+      <li><a href="#Add-Modify-assigns">15 Add/Modify assigns</a></li>
+      <li><a href="#Delete-assigns">16 Delete assigns</a></li>
+      <li><a href="#Create-a-shell-around-a-module">17 Create a shell around a module.</a></li>
+      <li><a href="#Replace-assigns-with-buffers">18 Replace assigns with buffers.</a></li>
+      <li><a href="#Pull-pins-to-top-level">19 Pull pins to top level.</a></li>
+      <li><a href="#Add-Modify-parameter-declarations">20 Add/Modify parameter declarations</a></li>
+      <li><a href="#Delete-parameter-declarations">21 Delete parameter declarations</a></li>
+    </ul>
+  </li>
+  <li><a href="#AUTHORS">AUTHORS</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>veredit 3.0.19 (Dec 4 2025)</p>
+
+<p>Script based editor for structural Verilog netlists.</p>
+
+<h1 id="SYNOPSYS">SYNOPSYS</h1>
+
+<pre><code>veredit &lt;verilog file(s)&gt; [&lt;editfile&gt;] [options]</code></pre>
+
+<h2 id="Options">Options</h2>
+
+<pre><code>-writeEdits            : generate default editfile.
+  [-leafCells]         : include leaf cells.
+  [-instLength #]      : only include cells with instantiation names
+                         longer than #.
+-writeDot              : generate Dotty hierarchy file.
+  [-leafCells]         : include leaf cells.
+  [-instLength #]      : only include cells with instantiation names
+                         longer than #.
+-install [MODULE-LIST] : write MPC install file.
+-ifspec [MODULE-LIST]  : write GenTB ifspec file.
+  [-clk CLOCK-LIST]    : space separated list of clock names.
+-inst [MODULE-LIST]    : write hierarchical instance names of modules.
+-edt [MODULE-LIST]     : write ED&amp;T library.
+-hier                  : write module hierarchy.
+-ver                   : write Verilog file.
+-top MODULE-NAME       : set top module name.
+-expand                : expand port and net declarations, delete single
+                         net declarations.
+-o OUTFILE             : set outfile name.</code></pre>
+
+<h2 id="Edit-Statements">Edit Statements</h2>
+
+<pre><code>1   Buffer reentrant outputs
+2   Insert a buffer (or inverter) behind a cell output
+3   Insert a buffer (or inverter) before a cell input
+4   Adding input or output observe modules
+5   Adding tie cells
+6   List instances connected to a certain net
+7   Adding a module
+8   Deleting a module
+9   Add ports or net-declarations to a module
+10  Deleting ports or net-declarations from a module
+11  Modify instance names
+12  Add/Modify instances or module connections
+13  Modify instances or module connections
+14  Delete instances or module connections
+15  Add/Modify assigns
+16  Delete assigns
+17  Create a shell around a module.
+18  Replace assigns with buffers.
+19  Pull pins to top level.
+20  Add/Modify parameter declarations
+21  Delete parameter declarations</code></pre>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Veredit can automate editing of a structural verilog netlist. It can automate any edit that a designer normally would do with a text editor. It has a few smarter functions like insert a buffer, buffer reentrant outputs, insert observe modules and show the hierarchy.</p>
+
+<p>Veredit has proven to be mature, but the output must always be verified. The motto is: you get what you specify.</p>
+
+<h1 id="HISTORY">HISTORY</h1>
+
+<p>The first version of Veredit was made in 1999 during the CPA [1] project by Ondrej Popp. The first function was to modify instance names. All other edit functions have been added by Erwin Waterlander.</p>
+
+<p>Veredit has been used in several IC design projects in Philips Research and Philips Semiconductors (now NXP). Veredit was part of &quot;Paradice&quot; flow.</p>
+
+<p>Veredit was not an official company tool. It was made by IC designers for IC designers. See also [1] chapter 9.</p>
+
+<p>Veredit was build with Ondrej Popp&#39;s C3PO: <a href="https://sourceforge.net/projects/c3po">https://sourceforge.net/projects/c3po</a></p>
+
+<h1 id="REFERENCES">REFERENCES</h1>
+
+<p>[1] CPA designflow evaluation (Go with the flow!) Erwin Waterlander, Ad Vaassen and Marcel Oosterhuis Philips Research Eindhoven, NL-Rep 7121, Oct 2000</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="writeDot"><b>-writeDot</b></dt>
+<dd>
+
+<p>Display Netlist hierarchy</p>
+
+<p>With this option veredit generates a Dotty input file that shows the hierarchy of the verilog netlist. All declared modules are included. If option -leafCells is also used, all instantiated modules are included.</p>
+
+<p>Note that library cells can be removed with the -novermod option of &#39;dino&#39;.</p>
+
+<p>To convert the output to PDF type: dot -Tpdf -Gsize=&quot;7.5,10&quot; foo.dot &gt; foo.pdf</p>
+
+<p>dot can be downloaded from: <a href="http://www.research.att.com/sw/tools/graphviz/">http://www.research.att.com/sw/tools/graphviz/</a></p>
+
+</dd>
+<dt id="install-MODULE-LIST"><b>-install [MODULE-LIST]</b></dt>
+<dd>
+
+<p>Write MPC install file</p>
+
+<p>With the -install option Veredit will generate MPC install views of verilog modules. Install files contain abstract views of leaf cells used by MPC.</p>
+
+<p>MPC (Multi Purpose Network Compiler) is a program to automatically generate structure (e.g. the top level structure of a chip). Its output is VHDL or Verilog.</p>
+
+<p><a href="https://sourceforge.net/projects/mpsc">https://sourceforge.net/projects/mpsc</a></p>
+
+<p>MPC can also generate YAPI application structure.</p>
+
+<p>MODULE-LIST is an optional space seperated list of module names which will be written out. When no MODULE-LIST is specified all modules will be written.</p>
+
+</dd>
+<dt id="ifspec-MODULE-LIST--clk-CLOCK-LIST"><b>-ifspec [MODULE-LIST] [-clk CLOCK-LIST]</b></dt>
+<dd>
+
+<p>Write GenTB ifspec file</p>
+
+<p>With the -ifspec option Veredit will generate GenTB ifspec views of verilog modules.</p>
+
+<p>GenTB is an automatic testbench generator. It can read a VHDL package or ifspec file and generate a testbench for the selected entity. The testbench needs a stimuli file and expected output data. The output is checked on the fly.</p>
+
+<p>MODULE-LIST is an optional space seperated list of module names which will be written out. When no MODULE-LIST is specified all modules will be written.</p>
+
+<p>with -clk CLOCK-LIST a list of clocks can be given. The same as with the -clk option of GenTB. The given clocks will not be in the ifspec file.</p>
+
+</dd>
+<dt id="edt-MODULE-LIST"><b>-edt [MODULE-LIST]</b></dt>
+<dd>
+
+<p>Write ED&amp;T library</p>
+
+<p>With opition -edt one can create a simple ED&amp;T library with the interfaces of the verilog modules. There are also fanout, fanin and area figures written in the library, but that are dummy values just to prevent complaining of the ED&amp;T tools.</p>
+
+<p>MODULE-LIST is an optional space seperated list of module names which will be written in the ED&amp;T library. When no MODULE-LIST is specified all modules will be written.</p>
+
+<p>Examples:</p>
+
+<pre><code>    veredit foo.v -edt top -o foo.edt_lib
+ 
+    veredit foo.v -edt</code></pre>
+
+</dd>
+<dt id="ver"><b>-ver</b></dt>
+<dd>
+
+<p>Write Verilog file</p>
+
+<p>When there are edit statements a Verilog output file will always be written. When there are no edit statements this option -ver can be used to force veredit to write out the parsed Verilog in a file.</p>
+
+</dd>
+<dt id="top-MODULE-NAME"><b>-top MODULE-NAME</b></dt>
+<dd>
+
+<p>Write Verilog file</p>
+
+<p>When -top is used Veredit will write out a verilog file with only the hierarchy from module MODULE-NAME and down.</p>
+
+<p>Option -top is optional. If -top is not used Veredit will write out all modules as usual.</p>
+
+</dd>
+<dt id="expand"><b>-expand</b></dt>
+<dd>
+
+<p>Expand port and net declarations, delete single net declarations.</p>
+
+<p>With this option Veredit expands all port and net declarations and removes single wire declarations.</p>
+
+<p>This is handy when you want to run some AWK or Perl script on your netlist. It makes parsing much simpler.</p>
+
+<p>E.g.</p>
+
+<pre><code>output [2:0] a, b;
+input c, d;
+wire [2:0] a, b;
+wire c, d;</code></pre>
+
+<p>becomes:</p>
+
+<pre><code>output [2:0] a;
+output [2:0] b;
+input c;
+input d;
+wire [2:0] a;
+wire [2:0] b;</code></pre>
+
+</dd>
+<dt id="inst-MODULE-LIST"><b>-inst [MODULE-LIST]</b></dt>
+<dd>
+
+<p>Write hierarchical instance names of modules.</p>
+
+<p>Write hierarchal instance names to file. Names are also written to stdout. When MODULE-LIST is omitted hierachical names of all modules are printed.</p>
+
+<p>Only modules that are in the netlist are listed.</p>
+
+</dd>
+<dt id="hier"><b>-hier</b></dt>
+<dd>
+
+<p>Write module hierarchy</p>
+
+<p>Write module hierarchy to file. Modules are only listed once per hierarchy level.</p>
+
+</dd>
+<dt id="o-OUTFILE"><b>-o OUTFILE</b></dt>
+<dd>
+
+<p>Set the name of the output Verilog file.</p>
+
+</dd>
+</dl>
+
+<h1 id="EDIT-STATEMENTS-SYNTAX">EDIT-STATEMENTS SYNTAX</h1>
+
+<p>Veredit expects first verilog and then edit-statements. Edit statements work on a module. An edit section for one module looks like this:</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   [edit-statements]*
+}</code></pre>
+
+<p>For each module you want to edit you can place such a section in an edit command file.</p>
+
+<p>E.g.:</p>
+
+<pre><code>MODULE module_1
+{
+   edit-statement_1
+   edit-statement_2
+}
+
+MODULE module_2
+{
+   edit-statement_3
+   edit-statement_4
+   edit-statement_5
+}</code></pre>
+
+<p>Edit-statements are applied in the order they are written down. A next edit statement can immediate edit the result of a previous one. Only the editing of instance names (-instance ...) is always done last during netlist write out.</p>
+
+<p>Edit statements can have multiple options. The order of the options is fixed as is shown in this README file. Changing the order will result in a syntax error. Some options in this file are shown between square brackets. This means that these options are optional.</p>
+
+<p>For instance the edit statement &#39;-buffer&#39; has three options. The options -input and -output are optional. The &lt;instantiation-list outputs&gt; option is required. One cannot change the order of the three options.</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -buffer &lt;buffer name&gt;
+   [ -input &lt;buffer input pin name&gt; ]
+   [ -output &lt;buffer output pin name&gt; ]
+   &lt;instantiation-list outputs&gt;
+}</code></pre>
+
+<p>The &lt;modulename&gt; may contain one or more asterisk wildcard characters `*&#39;. The matching algorithm is similar to file name matching. For instance to apply a certain edit-statement on all modules, one can do the following:</p>
+
+<pre><code>MODULE *
+{
+   edit-statement_1
+}</code></pre>
+
+<h2 id="Buffer-reentrant-outputs">1 Buffer reentrant outputs</h2>
+
+<p>veredit inserts buffers before outputs of the module if the output net is connected to an input pin of an instance of that module.</p>
+
+<p>To determine the pins of the buffer and the direction of submodule pins it is required that the module declarations are in the input file.</p>
+
+<p>syntax:</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -bufferoutputs &lt;buffer name&gt; [ -exclude &lt;signal list&gt; ]
+}</code></pre>
+
+<p>The -exclude option is optional.</p>
+
+<p>Example:</p>
+
+<pre><code>MODULE MACRO_DBESS
+{
+  -bufferoutputs BF4TX32_P -exclude TIMB0CLK,TIMMCORE_CLOCKDR
+}</code></pre>
+
+<h2 id="Insert-a-buffer-or-inverter-behind-a-cell-output">2 Insert a buffer (or inverter) behind a cell output</h2>
+
+<p>Veredit can insert a buffer in the netlist BEHIND A CELL OUTPUT, creating a new unique net name and a new unique instance name.</p>
+
+<p>It has not much intelligence yet: - The feature does only single bit until now. - you have to provide the name of the instance output pin(s) whereto the buffer has to be connected. - The input pin name of the buffer can be specified with the optional parameter -input. The default input pin name is A. - The output pin name of the buffer can be specified with the optional parameter -output. The default input pin name is Z.</p>
+
+<p>You need to specify only the outputs to which the buffer will be connected.</p>
+
+<p>Syntax:</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -buffer &lt;buffer name&gt;
+   [ -input &lt;buffer input pin name&gt; ]
+   [ -output &lt;buffer output pin name&gt; ]
+   &lt;instantiation-list outputs&gt;
+}</code></pre>
+
+<p>Example (will add 3 buffers):</p>
+
+<pre><code>MODULE test
+{
+   -buffer BF4TX32_P
+     AO39_P  inst_a(.Z());
+     FD1SQ_P inst_b(.Q());
+     ND2_P   inst_C(.Z());
+}</code></pre>
+
+<h2 id="Insert-a-buffer-or-inverter-before-a-cell-input">3 Insert a buffer (or inverter) before a cell input</h2>
+
+<p>This command works the same as the one above (-buffer), except that this command inserts a buffer BEFORE A CELL INPUT.</p>
+
+<p>Syntax:</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -bufferinput &lt;buffer name&gt;
+   [ -input &lt;buffer input pin name&gt; ]
+   [ -output &lt;buffer output pin name&gt; ]
+   &lt;instantiation-list outputs&gt;
+}</code></pre>
+
+<p>Example (will add 3 buffers):</p>
+
+<pre><code>MODULE test
+{
+   -bufferinput BF4TX32_P
+     AO39_P  inst_a(.A());
+     FD1SQ_P inst_b(.D());
+     ND2_P   inst_C(.A());
+}</code></pre>
+
+<p>Example, buffer has non-default pin names</p>
+
+<pre><code>MODULE test
+{
+   -bufferinput BUFFD
+   -input I
+   -output X
+     AO39_P  inst_a(.A());
+     FD1SQ_P inst_b(.D());
+     ND2_P   inst_C(.A());
+}</code></pre>
+
+<h2 id="Adding-input-or-output-observe-modules">4 Adding input or output observe modules</h2>
+
+<p>This function is used to insert observe modules for boundary scan test, but can also be used for insertion of other modules (for instance flipflops).</p>
+
+<p>One has to specify the input pin and output pin of the module to insert. With the &#39;-other&#39; directive one can specify common nets that are connected to all of the inserted modules (for instance the clock). In addition the nets for which this has to be applied have to be given.</p>
+
+<p>With -insertobsinput one can insert a module in an input net. A new unique net name is created for connection to the output of the module. In the module connections of the other instances the original input net name is also changed to the new created net name.</p>
+
+<p>to add input observe modules:</p>
+
+<pre><code>MODULE &lt;top module name&gt;
+{
+  -insertobsinput &lt;observe module name&gt;
+    -input &lt;input pin name of obs module&gt;
+    -output &lt;output pin name of obs module&gt;
+  [ -other &lt;other pins that must be connected&gt; ]
+    -nets &lt;net names were obs module must be inserted&gt;
+}</code></pre>
+
+<p>The construct -other &lt;other pins that must be connected&gt; is optional.</p>
+
+<p>With -insertobsoutput one can insert a module in an output net. A new unique net name is created for connection to the input of the module. In the module connections of the other instances the original output net name is also changed to the new created net name.</p>
+
+<p>to add output observe module:</p>
+
+<pre><code>MODULE &lt;top module name&gt;
+{
+  -insertobsoutput &lt;observe module name&gt;
+    -input &lt;input pin name of obs module&gt;
+    -output &lt;output pin name of obs module&gt;
+  [ -other &lt;other pins that must be connected&gt; ]
+    -nets &lt;net names were obs module must be inserted&gt;
+}</code></pre>
+
+<p>The construct -other &lt;other pins that must be connected&gt; is optional.</p>
+
+<p>Example:</p>
+
+<pre><code> MODULE psys_1801
+ {
+    -insertobsinput dft_obs_ctrl_comb
+         -input D 
+         -output Q 
+         -other .CP(dtl_mmio_clk), .HOLD(hold_inputs)
+         -nets dtl_mmio_rst_an pi_sel[2:0] pi_tout
+ 
+     -insertobsoutput dft_obs_ctrl_ff
+         -input D
+         -output Q
+         -other .CP(dtl_mmio_clk), .HOLD(hold_inputs), .X(X)
+         -nets pi_ack[2:0] dtl_mmio_abort_all
+ }</code></pre>
+
+<p>Note that you are allowed to omit the vector range if the net is a vector (bus) and you want to apply to the complete vector.</p>
+
+<h2 id="Adding-tie-cells">5 Adding tie cells</h2>
+
+<p>Veredit can add tie cells to your design. You can add any kind of tie cell. One you made yourself or one from the corelib library.</p>
+
+<pre><code>MODULE &lt;module name&gt;
+{
+    -tiecell &lt;module name of the tie cell&gt;
+    -output &lt;output pin name of the tie cell&gt;
+  [ -other &lt;other pins that must be connected&gt; ]
+    -net &lt;net name that needs to be connected to tie cell&gt;
+  [ -exclude &lt;pins to exclude&gt; ]
+  [ -inst &lt;instance names&gt; ]
+  [ -label &lt;instance name label&gt;]
+}</code></pre>
+
+<dl>
+
+<dt id="tiecell"><b>-tiecell</b></dt>
+<dd>
+
+<p>Name of the tiecell. This can be a library cell or a cell you made yourself.</p>
+
+</dd>
+<dt id="output"><b>-output</b></dt>
+<dd>
+
+<p>Name of the output pin of the tie cell.</p>
+
+</dd>
+<dt id="other"><b>-other</b></dt>
+<dd>
+
+<p>Optional parameter to specify other pins. This is for selfmade tiecells. For instance to connect a clock and a reset pin. Use the Verilog portmap syntax to specify connections.</p>
+
+</dd>
+<dt id="net"><b>-net</b></dt>
+<dd>
+
+<p>Specify the nets for which a tiecell has to be inserted. This can be a list separated by spaces. Only non-bus nets are supported.</p>
+
+</dd>
+<dt id="exclude"><b>-exclude</b></dt>
+<dd>
+
+<p>Optional parameter. With this option one can specify a list of pins which will be excluded from tieing to a tiecell. For instance testpins like si and ssi. The list is separated by spaces.</p>
+
+</dd>
+<dt id="inst"><b>-inst</b></dt>
+<dd>
+
+<p>Optional parameter. With this option one can specify instance names. Only the instances in this space separated list will get a tiecell connection, all others are skipped. Without this option all instances will get a tiecell connection if needed. Wildcard `*&#39; is supported.</p>
+
+</dd>
+<dt id="label"><b>-label</b></dt>
+<dd>
+
+<p>A label will be added in the instance name of the tiecell. The instance name will be &quot;&lt;tiecell name&gt;&lt;label&gt;_inst&quot;</p>
+
+</dd>
+</dl>
+
+<p>An example to insert tie cells in all modules:</p>
+
+<pre><code> MODULE *
+ {
+    -tiecell tie_down
+    -output Z
+    -other .rst_n(rst_n)
+    -net 1&#39;b0
+    -exclude si ssi ssi_q
+    -label _low
+ 
+    -tiecell tie_up
+    -output Z
+    -other .rst_n(rst_n)
+    -net 1&#39;b1 vdd
+    -label _high
+ }</code></pre>
+
+<p>Tie off a specific instance in module &quot;top&quot;.</p>
+
+<pre><code>MODULE top
+{
+    -tiecell tohx1
+    -output TH
+    -net 1&#39;b1
+    -inst i_34 U*
+}</code></pre>
+
+<h2 id="List-instances-connected-to-a-certain-net">6 List instances connected to a certain net</h2>
+
+<p>Veredit will create a file named &quot;MODULE-NAME-&lt;net name&gt;.instlist&quot; with a list of all the instances that have a port connected to &lt;net name&gt;.</p>
+
+<p>This function is unfinished work and works only correct on single nets that are not part of a vector.</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+  -listinst
+  -net &lt;net name&gt;
+  
+}</code></pre>
+
+<p>Example:</p>
+
+<pre><code>MODULE rdt_router_data
+{
+  -listinst
+  -net clk
+  
+}</code></pre>
+
+<h2 id="Adding-a-module">7 Adding a module</h2>
+
+<p>Add module to the verilog files you read in, or add it at the top of the edit-file.</p>
+
+<h2 id="Deleting-a-module">8 Deleting a module</h2>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -delete [ -empty ]
+}</code></pre>
+
+<p>If the optional construct -empty is used the module is only deleted if it has no instances an no continuous assigns.</p>
+
+<p>Example:</p>
+
+<pre><code>MODULE *
+{
+  -delete -empty
+}</code></pre>
+
+<h2 id="Add-ports-or-net-declarations-to-a-module">9 Add ports or net-declarations to a module</h2>
+
+<p>Specify new ports or nets with the verilog declaration list syntax.</p>
+
+<p>For ports this command will add a port and a port-declaration.</p>
+
+<p>When you try to add a port or net that is already in the module it will be ignored. You have to delete it first with -delports.</p>
+
+<p>Example:</p>
+
+<pre><code>MODULE modulename
+{
+   -addports
+     input Aap,Noot ;
+     output [2:0] Banaan;
+     inout Boom ;
+     wire [2:0] Banaan;
+}</code></pre>
+
+<h2 id="Deleting-ports-or-net-declarations-from-a-module">10 Deleting ports or net-declarations from a module</h2>
+
+<p>Specify the ports with the verilog port-list syntax. This command will delete the port, port-declaration and net-declaration. (Wires are also deleted.)</p>
+
+<p>This command can also be used to delete a net declaration (wire) when there is no port with that same name. You will get a warning that there was no port found with that name.</p>
+
+<p>Examples:</p>
+
+<pre><code>MODULE modulename
+{
+  -delports
+    TCP_CAS, TCP_WE, boot  // remove only these ports and net declarations.
+}
+
+MODULE modulename
+{
+  -delports        // remove all ports and their net declarations.
+    -ALL
+}</code></pre>
+
+<p>When using -rmports the net declarations (wires) are not deleted. Net declarations are added when they don&#39;t exist yet.</p>
+
+<pre><code>MODULE modulename
+{
+  -rmports
+    TCP_CAS, TCP_WE, boot  // remove only these ports and add wires.
+}
+
+MODULE modulename
+{
+  -rmports
+    -ALL        // this will remove all ports and place wires instead.
+}</code></pre>
+
+<p>When using -delnets only net declarations are deleted.</p>
+
+<pre><code>MODULE modulename
+{
+  -delnets
+    TCP_CAS, TCP_WE, boot  // remove only these nets.
+}
+
+MODULE modulename
+{
+  -delnets
+    -ALL        // this will remove all nets.
+}</code></pre>
+
+<h2 id="Modify-instance-names">11 Modify instance names</h2>
+
+<p>With this command instantiaton names can be modified.</p>
+
+<pre><code>MODULE &lt;modulename&gt;
+{
+   -instance oldname = newname
+}</code></pre>
+
+<p>These edits are always applied last, during netlist write out.</p>
+
+<p>A default editfile with all instantiation names can be generated with the -writeEdits option.</p>
+
+<p>Additional options -leafCells and -instLength can be used to generate a default edit file. For instance to include all leaf cells and only instantiation names longer than 10 characters:</p>
+
+<pre><code>veredit input.v -writeEdits -leafCells -instLength 10</code></pre>
+
+<h2 id="Add-Modify-instances-or-module-connections">12 Add/Modify instances or module connections</h2>
+
+<p>Specify with the verilog instance syntax. This statement can</p>
+
+<pre><code>- add a new instance
+- modify module name of an instance
+- modify net name if port name exists
+- create a new port connection with new net name
+
+
+   MODULE modulename
+   {
+      -addinst
+      [ -keepmodname ]
+        newmodname instancename ( .portname(newnetname)) ;
+   }</code></pre>
+
+<p>Veredit does only use the instance name to find an instance. When option -keepmodname is used the module name of the instance will not be changed. Then the module name of the instance is a don&#39;t care.</p>
+
+<p>Examples:</p>
+
+<pre><code>MODULE cpa
+{
+  -addinst
+    newcell i0 (.CK(CK), .Z(Z));  // add a new cell connected to &#39;CK&#39; and &#39;Z&#39;
+    newname i1 ();                // change module name only
+    cell    i2 (.myport(newnet)); // connect &#39;newnet&#39; to port &#39;myport&#39;.
+    cell2   i3 (.newport(reset)); // add &#39;newport&#39; and connect to &#39;reset&#39;
+}</code></pre>
+
+<p>Be aware that the module name of the instance will always be changed, also when you specify new connections, unless you use option -keepmodname.</p>
+
+<pre><code>MODULE top
+{
+    -addinst -keepmodname
+    module_Y inst_2 (.a(a));    // module_Y is a don&#39;t care here.
+}</code></pre>
+
+<h2 id="Modify-instances-or-module-connections">13 Modify instances or module connections</h2>
+
+<p>Specify with the verilog instance syntax. This statement can</p>
+
+<pre><code>- modify module name of an instance
+- modify net name if port name exists
+- create a new port connection with new net name
+
+
+   MODULE modulename
+   {
+      -modinst
+      [ -keepmodname ]
+        newmodname instancename ( .portname(newnetname)) ;
+   }</code></pre>
+
+<p>This command works the same as -addinst with the exception that it will never add a new instance if it doesn&#39;t exist and it will issue a warning if the instance doesn&#39;t exist.</p>
+
+<p>Veredit does only use the instance name to find an instance. When option -keepmodname is used the module name of the instance will not be changed. Then the module name of the instance is a don&#39;t care.</p>
+
+<p>Examples:</p>
+
+<pre><code>MODULE cpa
+{
+  -modinst
+    newname  i1 ();                 // change module name only
+    mycell   i2 (.myport(newnet));  // connect &#39;newnet&#39; to port &#39;myport&#39;.
+    mycell2  i3 (.newport(reset));  // add &#39;newport&#39; and connect to &#39;reset&#39;
+}</code></pre>
+
+<p>Be aware that the module name of the instance will always be changed, also when you specify new connections, unless you use option -keepmodname.</p>
+
+<pre><code>MODULE top
+{
+    -modinst -keepmodname
+    module_Y inst_2 (.a(a));    // module_Y is a don&#39;t care here.
+}</code></pre>
+
+<h2 id="Delete-instances-or-module-connections">14 Delete instances or module connections</h2>
+
+<p>Specify with the verilog instance syntax. This statement can</p>
+
+<pre><code>- delete an instance
+- delete a connection from an instance
+- delete all instances</code></pre>
+
+<p>When there are no module connections given veredit deletes the complete instance.</p>
+
+<p>To select an instance only the instance name has to match. The cell name is a don&#39;t care.</p>
+
+<p>To delete a connection you don&#39;t need to provide the net-name to which the port is connected. It is a don&#39;t care.</p>
+
+<pre><code>MODULE modulename
+{
+  -delinst
+    cellname instname (.portname(netname));
+}
+
+MODULE modulename
+{
+  -delinst
+    -ALL
+}</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>MODULE cpa_top
+{
+   -delinst
+    IOP IOP_inst ();           // remove complete instance
+    MT  MT_inst (.TIMC0SDA(),  // remove 3 connections from instance
+          .TIMXZ2L0B0(), .A(Z));
+}
+
+MODULE global_controller
+{
+   -delinst
+     -ALL              // delete all instances
+}</code></pre>
+
+<h2 id="Add-Modify-assigns">15 Add/Modify assigns</h2>
+
+<p>use assign syntax. This statement can</p>
+
+<pre><code>- add a new assign statement
+- modify an assign statement</code></pre>
+
+<p>Example:</p>
+
+<pre><code>MODULE modulename
+{
+   -addassign
+     assign clkout[3:0] = TD[7:4] ;
+     assign clkout[10:9] = wat[1:0];
+     assign a = b ;
+}</code></pre>
+
+<h2 id="Delete-assigns">16 Delete assigns</h2>
+
+<p>This statement can</p>
+
+<pre><code>- delete an assign statement
+- delete all assign statements</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>MODULE modulename
+{
+   -delassign
+     assign clkout = TQ[5] ;
+     assign c = TQ[5] ;
+}
+
+MODULE modulename2
+{
+   -delassign
+     -ALL
+}</code></pre>
+
+<h2 id="Create-a-shell-around-a-module">17 Create a shell around a module.</h2>
+
+<p>This statement will create a new module which is a shell (wrapper) around the module. IO ports will be mapped one to one. You have to specify the new module name and take care that it is unique. The instance name of the original module in the shell will be the module name with &quot;_inst&quot; concatenated.</p>
+
+<pre><code>MODULE MODULE-NAME
+{
+  -shell &lt;shell module name&gt;
+}</code></pre>
+
+<p>After this statement you can direct run edit statements on the new module.</p>
+
+<p>Example:</p>
+
+<pre><code>MODULE top
+{
+  -shell top_shell
+}</code></pre>
+
+<h2 id="Replace-assigns-with-buffers">18 Replace assigns with buffers.</h2>
+
+<p>This statement will replace simple single bit continuous assigns with a buffer. The input pin name of the buffer can be specified with the optional parameter -input. The default input pin name is <code>A</code>. The output pin name of the buffer can be specified with the optional parameter -output. The default input pin name is <code>Z</code>.</p>
+
+<pre><code>MODULE MODULE-NAME
+{
+   -bufferassigns &lt;buffer name&gt;
+   [ -input &lt;buffer input pin name&gt; ]
+   [ -output &lt;buffer output pin name&gt; ]
+}</code></pre>
+
+<p>Example:</p>
+
+<pre><code>MODULE *
+{
+   -bufferassigns bfx1
+}
+
+MODULE *
+{
+   -bufferassigns BUFFD1 -input I
+}</code></pre>
+
+<h2 id="Pull-pins-to-top-level">19 Pull pins to top level.</h2>
+
+<p>Pull pins to top level. Pins are merged up in the hierarchy. This counts for pins that already exist and for pins that meet each other, because there are multiple instances of the module in the hierarchy.</p>
+
+<pre><code>MODULE MODULE-NAME
+{
+    -pulluppin &lt;pin list&gt;
+}</code></pre>
+
+<p>&lt;pin list&gt; is a list of pin names separated by spaces. Bus names are also supported.</p>
+
+<p>Example:</p>
+
+<pre><code>MODULE a
+{
+    // this will pull up pins Q and DBUS to toplevel.
+    -pulluppin Q DBUS
+}</code></pre>
+
+<h2 id="Add-Modify-parameter-declarations">20 Add/Modify parameter declarations</h2>
+
+<p>use parameter declaration syntax. This statement can</p>
+
+<pre><code>- add a new parameter declaration statement
+- modify a parameter declaration statement</code></pre>
+
+<p>Example:</p>
+
+<pre><code>MODULE modulename
+{
+   -addparameterdecl
+    parameter x = 300 ;
+    parameter y = 200 ;
+   
+}</code></pre>
+
+<h2 id="Delete-parameter-declarations">21 Delete parameter declarations</h2>
+
+<p>This statement can</p>
+
+<pre><code>- delete a parameter declaration statement
+- delete all parameter declaration statements</code></pre>
+
+<p>Examples:</p>
+
+<pre><code>MODULE modulename
+{
+   -delparameterdecl
+    parameter y = 200 ;
+}
+
+MODULE modulename2
+{
+   -delparameterdecl
+     -ALL
+}</code></pre>
+
+<h1 id="AUTHORS">AUTHORS</h1>
+
+<p>Veredit is made by C3PO, Ondrej Popp and Erwin Waterlander</p>
+
+<p>Erwin Waterlander &lt;waterlan@xs4all.nl&gt;</p>
+
+<p>Ondrej Popp &lt;ondrejpopp@users.sourceforge.net&gt;</p>
+
+<p>C3PO: <a href="http://sourceforge.net/projects/c3po">http://sourceforge.net/projects/c3po</a></p>
+
+
+</body>
+
+</html>
+
+

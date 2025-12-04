@@ -1,0 +1,22 @@
+MODULE core
+{
+
+  -insertobsinput MX21
+    -input D1
+    -output Z
+    -other .D0(new_si), .S0(mysig)
+    -nets si[0] sx
+
+  -addports
+    input new_si,mysig;
+  
+
+  -insertobsoutput MX21
+    -input D1
+    -output Z
+    -other  .D0(new_si), .S0(mysig)
+    -nets so[0] sy[2:1] sz
+
+}
+
+

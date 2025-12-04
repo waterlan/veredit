@@ -1,0 +1,7 @@
+a_sub	inst_a/a_i0
+a_sub	inst_a/a_i1
+a_sub	inst_C/c_i0
+a_sub	inst_C/c_i1
+a	inst_a
+b	Z2_inst
+c	inst_C
