@@ -21,7 +21,7 @@ tag:
 	cd ..; git push origin v$(VERSION)
 
 dist:
-	cd ..; git archive --prefix=veredit-$(VERSION)/ --format tar.gz -o veredit-$(VERSION).tar.gz veredit-$(VERSION)
+	cd ..; git archive --prefix=veredit-$(VERSION)/ --format tar.gz -o veredit-$(VERSION).tar.gz v$(VERSION)
 
 disthead:
 	cd ..; git archive --prefix=veredit-head/ --format tar.gz -o veredit-head.tar.gz HEAD
