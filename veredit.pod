@@ -110,7 +110,7 @@ Note that library cells can be removed with the
 To convert the output to PDF type:
 dot -Tpdf -Gsize="7.5,10" foo.dot > foo.pdf
 
-dot can be downloaded from: L<http://www.research.att.com/sw/tools/graphviz/>
+dot can be downloaded from: L<https://graphviz.org/>
 
 =item B<-install [MODULE-LIST]>
 
@@ -1027,6 +1027,6 @@ Erwin Waterlander <waterlan@xs4all.nl>
 
 Ondrej Popp <ondrejpopp@users.sourceforge.net>
 
-C3PO: L<http://sourceforge.net/projects/c3po>
+C3PO: L<https://sourceforge.net/projects/c3po>
 
 =cut

@@ -9,7 +9,7 @@ any edit that a designer normally would do with a text editor. It has a few
 smarter functions like insert a buffer, buffer reentrant outputs, insert observe
 modules and show the hierarchy.
 
-For more information see the [Veredit manual](veredit.html)
+For more information see the [Veredit manual](veredit.pod)
 
 ## Changes
 
