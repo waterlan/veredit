@@ -17,8 +17,8 @@ all:
 	@echo "disthead:   create source tar ball of current HEAD"
 	@echo "bin:        create binary package"
 tag:
-	cd ..; git tag -a veredit-$(VERSION) -m "Tagging veredit release $(VERSION)."
-	cd ..; git push origin veredit-$(VERSION)
+	cd ..; git tag -a v$(VERSION) -m "Tagging veredit release $(VERSION)."
+	cd ..; git push origin v$(VERSION)
 
 dist:
 	cd ..; git archive --prefix=veredit-$(VERSION)/ --format tar.gz -o veredit-$(VERSION).tar.gz veredit-$(VERSION)
