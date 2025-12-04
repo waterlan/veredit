@@ -27,5 +27,5 @@ See [INSTALL](INSTALL.txt) for how to build veredit yourself.
 ## Copyright
 
 The veredit package is distributed under FreeBSD style license.
-See [COPYRIGHT](COPYRIGHT.txt) and
+See [COPYING](COPYING.txt) and
 [The FreeBSD Copyright](https://www.freebsd.org/copyright/freebsd-license.html)
