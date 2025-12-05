@@ -1,4 +1,6 @@
 VERSION = 3.0.19
+MACHINE := $(shell uname -m)
+KERNELNAME := $(shell uname -s)
 
 OBJ = \
  veredit-$(VERSION)/veredit \
@@ -29,4 +31,4 @@ disthead:
 bin:
 	cd ..; tar xaf veredit-$(VERSION).tar.gz
 	cd ../veredit-$(VERSION); ./Compile
-	cd ..; tar caf veredit-linux-x86_64-$(VERSION).tar.gz $(OBJ)
+	cd ..; tar caf veredit-$(VERSION)-$(KERNELNAME)-$(MACHINE).tar.gz $(OBJ)

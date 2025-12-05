@@ -24,6 +24,12 @@ See [INSTALL](INSTALL.txt) for how to build veredit yourself.
 [Veredit on GitHub](https://github.com/waterlan/veredit)
 
 
+## Authors
+
+Ondrej Popp
+
+Erwin Waterlander <waterlan@xs4all.nl>
+
 ## Copyright
 
 The veredit package is distributed under FreeBSD style license.
