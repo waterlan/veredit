@@ -3,7 +3,7 @@ PREREQUISITES
         Requires for a clean build:
 
             gcc >= 4.5.0
-            flex 2.5.35
+            flex >= 2.5.35
             bison
             imake
             GNU make
@@ -13,11 +13,19 @@ PREREQUISITES
 
             cp Config.h.gcc422 Config.h
 
-INSTALLATION
+BUILDING
 
-        Type the following command to compile:
+        If you have a working imake flow on your system
+        type the following command to compile:
 
             ./Compile
+
+        If you don't have a working imake flow
+        you can try using the included Makefiles:
+
+            make
+            make -f Manual.mk
+
 
 DEVELOPMENT
 

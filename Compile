@@ -1,6 +1,10 @@
+#!/bin/bash
+
 xmkmf
 make Makefiles
 sed -i "s/-D_BSD_SOURCE -D_SVID_SOURCE/-D_DEFAULT_SOURCE/" Makefile */Makefile
-make depend
+# Skip make depend for simpler Makefiles to allow building across
+# systems that don't have imake installed.
+#make depend
 make
 make -f Manual.mk
