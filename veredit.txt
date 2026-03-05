@@ -1,5 +1,5 @@
 NAME
-    veredit 3.0.19 (Dec 4 2025)
+    veredit 3.0.20 (Mar 5 2026)
 
     Script based editor for structural Verilog netlists.
 
@@ -94,8 +94,7 @@ OPTIONS
         To convert the output to PDF type: dot -Tpdf -Gsize="7.5,10" foo.dot
         > foo.pdf
 
-        dot can be downloaded from:
-        <http://www.research.att.com/sw/tools/graphviz/>
+        dot can be downloaded from: <https://graphviz.org/>
 
     -install [MODULE-LIST]
         Write MPC install file
@@ -916,5 +915,5 @@ AUTHORS
 
     Ondrej Popp <ondrejpopp@users.sourceforge.net>
 
-    C3PO: <http://sourceforge.net/projects/c3po>
+    C3PO: <https://sourceforge.net/projects/c3po>
 

@@ -1,4 +1,4 @@
-// Copyright (C) 1999-2025  Erwin Waterlander
+// Copyright (C) 1999-2026  Erwin Waterlander
 // Copyright (C) 1999       Ondrej Popp
 // All rights reserved.
 // 
@@ -27,8 +27,8 @@
 #ifndef _VERSION_INCLUDED_
 #define _VERSION_INCLUDED_
 
-#define VEREDIT_VERSION "3.0.19"
+#define VEREDIT_VERSION "3.0.20"
 
-#define VEREDIT_DATE "Dec 4 2025"
+#define VEREDIT_DATE "Mar 5 2026"
 
 #endif

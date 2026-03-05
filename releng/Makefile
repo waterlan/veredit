@@ -1,4 +1,4 @@
-VERSION = 3.0.19
+VERSION = 3.0.20
 MACHINE := $(shell uname -m)
 KERNELNAME := $(shell uname -s)
 
@@ -29,6 +29,8 @@ disthead:
 	cd ..; git archive --prefix=veredit-head/ --format tar.gz -o veredit-head.tar.gz HEAD
 
 bin:
+	rm -rf ../veredit-$(VERSION)
 	cd ..; tar xaf veredit-$(VERSION).tar.gz
+	cd ../veredit-$(VERSION); make clean
 	cd ../veredit-$(VERSION); ./Compile
 	cd ..; tar caf veredit-$(VERSION)-$(KERNELNAME)-$(MACHINE).tar.gz $(OBJ)

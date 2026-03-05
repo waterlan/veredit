@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-veredit 3.0.19 (Dec 4 2025)
+veredit 3.0.20 (Mar 5 2026)
 
 Script based editor for structural Verilog netlists.
 

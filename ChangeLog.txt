@@ -1,3 +1,7 @@
+3.0.20 2026-03-05  Erwin
+	* Include generated Makefiles for easier compilation.
+	* Cleanup.
+
 3.0.19 2025-12-03  Erwin
 	* Add FreeBSD license en publish veredit on GitHub.
 	* Change to C3PO 0.20.41.
