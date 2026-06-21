@@ -1,4 +1,4 @@
-// Copyright (C) 1999-2025  Erwin Waterlander
+// Copyright (C) 1999-2026  Erwin Waterlander
 // Copyright (C) 1999       Ondrej Popp
 // All rights reserved.
 // 
@@ -33,7 +33,7 @@
 #include "text.h"
 #include "version.h"
 
-expfun void Usage(int argc,
+expfun void Usage(int,
                   char** argv)
 {
 

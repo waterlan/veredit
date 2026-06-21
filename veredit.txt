@@ -1,5 +1,5 @@
 NAME
-    veredit 3.0.20 (Mar 5 2026)
+    veredit 3.0.21 (Jun 21 2026)
 
     Script based editor for structural Verilog netlists.
 

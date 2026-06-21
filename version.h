@@ -27,8 +27,8 @@
 #ifndef _VERSION_INCLUDED_
 #define _VERSION_INCLUDED_
 
-#define VEREDIT_VERSION "3.0.20"
+#define VEREDIT_VERSION "3.0.21"
 
-#define VEREDIT_DATE "Mar 5 2026"
+#define VEREDIT_DATE "Jun 21 2026"
 
 #endif

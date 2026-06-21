@@ -1,4 +1,4 @@
-VERSION = 3.0.20
+VERSION = 3.0.21
 MACHINE := $(shell uname -m)
 KERNELNAME := $(shell uname -s)
 
@@ -31,6 +31,9 @@ disthead:
 bin:
 	rm -rf ../veredit-$(VERSION)
 	cd ..; tar xaf veredit-$(VERSION).tar.gz
-	cd ../veredit-$(VERSION); make clean
-	cd ../veredit-$(VERSION); ./Compile
+	cd ../veredit-$(VERSION); rm -rf build
+	cd ../veredit-$(VERSION); mkdir build
+	cd ../veredit-$(VERSION)/build; cmake ..
+	cd ../veredit-$(VERSION)/build; make
+	cd ../veredit-$(VERSION); cp build/veredit .
 	cd ..; tar caf veredit-$(VERSION)-$(KERNELNAME)-$(MACHINE).tar.gz $(OBJ)

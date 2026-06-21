@@ -1,0 +1,82 @@
+set(OBJECTS_SRCS
+  Signal.cc
+  addport_statement.cc
+  assign_list.cc
+  bufassigns_statement.cc
+  buffer_statement.cc
+  buffer_type.cc
+  buffernet_statement.cc
+  compound_port_reference.cc
+  continuous_assign.cc
+  declaration.cc
+  declaration_list.cc
+  delete_module_statement.cc
+  delport_statement.cc
+  dot.cc
+  dot_list.cc
+  edit_element.cc
+  edit_list.cc
+  editassign_statement.cc
+  editassign_type.cc
+  editinst_statement.cc
+  editinst_type.cc
+  editparameter_decl_statement.cc
+  editparameter_decl_type.cc
+  editport_type.cc
+  expression.cc
+  insertObsInput_statement.cc
+  insertObsOutput_statement.cc
+  instance.cc
+  instantiation_list.cc
+  intset.cc
+  intsets.cc
+  listInst_statement.cc
+  match_item.cc
+  match_list.cc
+  module.cc
+  module_edit.cc
+  module_edit_list.cc
+  module_item.cc
+  module_item_list.cc
+  module_list.cc
+  name_list.cc
+  nameset.cc
+  objset.cc
+  parameter_decl.cc
+  parameter_decl_list.cc
+  port.cc
+  port_expression.cc
+  port_list.cc
+  port_reference.cc
+  port_reference_list.cc
+  portmap.cc
+  portmap_element.cc
+  pullup_pin_statement.cc
+  range.cc
+  remove_buf_statement.cc
+  rename_instance_statement.cc
+  shell_statement.cc
+  signal_list.cc
+  signal_type.cc
+  simple_signal.cc
+  simple_signal_list.cc
+  tiecell_statement.cc
+  translation_unit.cc
+  variable_list.cc
+  variable_name.cc
+  verilog_item.cc
+  verilog_item_list.cc
+  vname.cc
+  vnode.cc
+)
+
+add_library(objects STATIC ${OBJECTS_SRCS})
+
+target_include_directories(objects
+  PRIVATE
+  "${CMAKE_SOURCE_DIR}"
+  "${CMAKE_SOURCE_DIR}/util"
+  PUBLIC
+  "${CMAKE_SOURCE_DIR}"
+  "${CMAKE_SOURCE_DIR}/util"
+)

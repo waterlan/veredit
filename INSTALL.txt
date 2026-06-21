@@ -5,26 +5,17 @@ PREREQUISITES
             gcc >= 4.5.0
             flex >= 2.5.35
             bison
-            imake
+            cmake
             GNU make
             perl
 
-        For older versions of gcc use a different Config.h:
-
-            cp Config.h.gcc422 Config.h
-
 BUILDING
 
-        If you have a working imake flow on your system
-        type the following command to compile:
+        cmake -B build
+        cmake --build build
+        cmake --build install
 
-            ./Compile
-
-        If you don't have a working imake flow
-        you can try using the included Makefiles:
-
-            make
-            make -f Manual.mk
+        make -f Manual.mk
 
 
 DEVELOPMENT
